@@ -1,6 +1,6 @@
 # food_eye_fyp
 
-A new Flutter project.
+Final Year Project
 
 ## Getting Started
 
