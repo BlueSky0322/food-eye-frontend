@@ -41,7 +41,7 @@ class LoginPageState extends ChangeNotifier {
     return null;
   }
 
-  Future<void> login() async {
+  Future<bool?> login() async {
     // Create an instance of AuthUser
     AuthUser user = AuthUser(email: email, password: password);
 
@@ -51,6 +51,8 @@ class LoginPageState extends ChangeNotifier {
     if (email == 'a@a.c' && password == '123123') {
       print(email + " " + password);
       notifyListeners();
+      return true;
     }
+    return null;
   }
 }

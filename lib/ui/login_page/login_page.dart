@@ -2,7 +2,8 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/input_decoration.dart';
-import 'package:food_eye_fyp/components/my_textfield.dart';
+import 'package:food_eye_fyp/ui/home_page/home_page.dart';
+import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/constants.dart';
@@ -172,7 +173,20 @@ class LoginPage extends StatelessWidget {
                             onPressed: () {
                               if (loginPageState.formKey.currentState!
                                   .validate()) {
-                                loginPageState.login();
+                                loginPageState.login() == null
+                                    ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
+                                    : Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChangeNotifierProvider(
+                                            create: (context) =>
+                                                HomePageState(context),
+                                            child: const HomePage(),
+                                          ),
+                                        ));
                               }
                             },
                             style: ElevatedButton.styleFrom(

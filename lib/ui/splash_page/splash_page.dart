@@ -40,28 +40,29 @@ class SplashPage extends StatelessWidget {
                 width: 250,
                 height: 50,
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChangeNotifierProvider(
-                              create: (context) => RegisterPageState(context),
-                              child: const RegisterPage(),
-                            ),
-                          ));
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text("Register",
-                            style: TextStyle(
-                                fontFamily: 'Outfit',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                                color: primaryBtnText)),
-                      ],
-                    )),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                            create: (context) => RegisterPageState(context),
+                            child: const RegisterPage(),
+                          ),
+                        ));
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text("Register",
+                          style: TextStyle(
+                              fontFamily: 'Outfit',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: primaryBtnText)),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 15,
