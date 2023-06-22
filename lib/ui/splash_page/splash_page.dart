@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/ui/login_page/login_page.dart';
 import 'package:food_eye_fyp/ui/login_page/login_page_state.dart';
-import 'package:food_eye_fyp/ui/register_page/register_page.dart';
-import 'package:food_eye_fyp/ui/register_page/register_page_state.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:provider/provider.dart';
+
+import '../register_page/register_page.dart';
+import '../register_page/register_page_state.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -75,7 +76,7 @@ class SplashPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => ChangeNotifierProvider(
                               create: (context) => LoginPageState(context),
-                              child: const LoginPage(),
+                              child: LoginPage(),
                             ),
                           ));
                     },
