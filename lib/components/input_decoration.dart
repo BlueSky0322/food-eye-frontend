@@ -6,7 +6,7 @@ class CustomInputDecoration {
   static InputDecoration customInputDecoration({
     required String hintText,
     required String labelText,
-    required IconData prefixIcon,
+    required IconData? prefixIcon,
     required IconButton? suffixIcon,
   }) {
     return InputDecoration(
@@ -25,14 +25,20 @@ class CustomInputDecoration {
       hintText: hintText,
       hintStyle: const TextStyle(
         fontSize: 14,
+        fontFamily: 'Outfit',
         color: Color.fromARGB(255, 11, 133, 170),
       ),
       labelText: labelText,
       labelStyle: const TextStyle(
         fontSize: 20,
+        fontFamily: 'Outfit',
         color: Color.fromARGB(255, 96, 180, 206),
       ),
-      counterStyle: TextStyle(color: Colors.white),
+      errorStyle: const TextStyle(
+        fontSize: 14,
+        fontFamily: 'Outfit',
+        color: Colors.redAccent,
+      ),
     );
   }
 }

@@ -49,85 +49,154 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/images/banner-logo.png',
-                  fit: BoxFit.contain,
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/banner-logo.png',
+                fit: BoxFit.cover,
+              ),
+              const Text(
+                "Welcome Back!",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontFamily: 'Outfit',
                 ),
-                const SizedBox(
-                  height: 10,
+              ),
+              const Text(
+                "Enter email and password to continue.",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: 'Outfit',
                 ),
-                const Text(
-                  "Welcome back, you\'ve been missed!",
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 18, fontFamily: 'Outfit'),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ValueListenableBuilder<bool>(
-                    valueListenable: loginPageState.isPasswordVisible,
-                    builder: (context, isPassWordVisible, _) {
-                      return Form(
-                        key: loginPageState.formKey,
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              35, 0, 35, 0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                validator: (value) =>
-                                    loginPageState.validateEmail(value),
-                                style: const TextStyle(color: Colors.white),
-                                decoration:
-                                    CustomInputDecoration.customInputDecoration(
-                                        hintText: "example@email.com",
-                                        labelText: "Email",
-                                        prefixIcon: Icons.email_outlined,
-                                        suffixIcon: null),
-                                onChanged: (value) {
-                                  loginPageState.email;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                  validator: (value) =>
-                                      loginPageState.validatePassword(value),
-                                  obscureText:
-                                      !loginPageState.isPasswordVisible.value,
-                                  style: const TextStyle(color: Colors.white),
-                                  decoration: CustomInputDecoration
-                                      .customInputDecoration(
-                                    hintText: "Enter your password",
-                                    labelText: "Password",
-                                    prefixIcon: Icons.lock_outline_rounded,
-                                    suffixIcon: IconButton(
-                                      icon: Icon(!loginPageState
-                                              .isPasswordVisible.value
-                                          ? Icons.visibility_off
-                                          : Icons.visibility),
-                                      color: const Color.fromARGB(
-                                          255, 96, 180, 206),
-                                      onPressed: () {
-                                        loginPageState
-                                            .togglePasswordVisibility();
-                                      },
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(32, 32, 32, 32),
+                    child: Column(
+                      children: [
+                        ValueListenableBuilder<bool>(
+                            valueListenable: loginPageState.isPasswordVisible,
+                            builder: (context, isPassWordVisible, _) {
+                              return Form(
+                                key: loginPageState.formKey,
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      validator: (value) =>
+                                          loginPageState.validateEmail(value),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: CustomInputDecoration
+                                          .customInputDecoration(
+                                              hintText: "example@email.com",
+                                              labelText: "Email",
+                                              prefixIcon: Icons.email_outlined,
+                                              suffixIcon: null),
+                                      onChanged: (value) =>
+                                          loginPageState.email = value,
                                     ),
-                                  ),
-                                  onChanged: (value) {
-                                    loginPageState.email;
-                                  }),
-                            ],
-                          ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextFormField(
+                                        validator: (value) => loginPageState
+                                            .validatePassword(value),
+                                        obscureText: !loginPageState
+                                            .isPasswordVisible.value,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                        decoration: CustomInputDecoration
+                                            .customInputDecoration(
+                                          hintText: "Enter your password",
+                                          labelText: "Password",
+                                          prefixIcon:
+                                              Icons.lock_outline_rounded,
+                                          suffixIcon: IconButton(
+                                            icon: Icon(!loginPageState
+                                                    .isPasswordVisible.value
+                                                ? Icons.visibility_off
+                                                : Icons.visibility),
+                                            color: const Color.fromARGB(
+                                                255, 96, 180, 206),
+                                            onPressed: () {
+                                              loginPageState
+                                                  .togglePasswordVisibility();
+                                            },
+                                          ),
+                                        ),
+                                        onChanged: (value) =>
+                                            loginPageState.password = value),
+                                  ],
+                                ),
+                              );
+                            }),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            const Text(
+                              "Dont have an account?",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Outfit',
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "Create one",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 84, 229, 240),
+                                  fontSize: 16,
+                                  fontFamily: 'Outfit',
+                                  decoration: TextDecoration.underline,
+                                  decorationColor:
+                                      Color.fromARGB(255, 84, 229, 240),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      );
-                    }),
-              ],
-            ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: 200,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (loginPageState.formKey.currentState!
+                                  .validate()) {
+                                loginPageState.login();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryBtnBG),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text("Login",
+                                    style: TextStyle(
+                                        fontFamily: 'Outfit',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                        color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

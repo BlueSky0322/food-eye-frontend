@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../data/model/auth_user.dart';
+
 class LoginPageState extends ChangeNotifier {
   final BuildContext context;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -14,7 +16,7 @@ class LoginPageState extends ChangeNotifier {
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter some text';
+      return 'Field cannot be blank';
     }
 
     bool emailValid = RegExp(
@@ -29,7 +31,7 @@ class LoginPageState extends ChangeNotifier {
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter some text';
+      return 'Field cannot be blank';
     }
 
     if (value.length < 6) {
@@ -37,5 +39,18 @@ class LoginPageState extends ChangeNotifier {
     }
 
     return null;
+  }
+
+  Future<void> login() async {
+    // Create an instance of AuthUser
+    AuthUser user = AuthUser(email: email, password: password);
+
+    // Call your login API using a service or HTTP client
+    // Pass the user credentials and handle the response
+    // ...
+    if (email == 'a@a.c' && password == '123123') {
+      print(email + " " + password);
+      notifyListeners();
+    }
   }
 }
