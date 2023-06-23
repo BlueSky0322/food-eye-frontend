@@ -7,6 +7,8 @@ import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/constants.dart';
+import '../register_page/register_page.dart';
+import '../register_page/register_page_state.dart';
 import 'login_page_state.dart';
 
 class LoginPage extends StatelessWidget {
@@ -148,7 +150,18 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(
+                                        create: (context) =>
+                                            RegisterPageState(context),
+                                        child: const RegisterPage(),
+                                      ),
+                                    ));
+                              },
                               child: const Text(
                                 "Create one",
                                 style: TextStyle(
