@@ -42,7 +42,7 @@ class LoginPageState extends ChangeNotifier {
   }
 
   bool logintest() {
-    if (email == 'a@a.c' && password == '123123') {
+    if (email == 'a@a.a' && password == '123123') {
       notifyListeners();
       return true;
     } else {

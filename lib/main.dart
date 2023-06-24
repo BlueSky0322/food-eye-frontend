@@ -23,6 +23,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
+      routes: {
+        '/home': (context) => ChangeNotifierProvider(
+              create: (context) => HomePageState(context),
+              child: const HomePage(),
+            ),
+      },
       home: ChangeNotifierProvider(
           // create: (context) => HomePageState(context), child: const HomePage()),
           create: (context) => SplashPageState(context),

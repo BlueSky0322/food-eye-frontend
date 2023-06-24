@@ -260,16 +260,11 @@ class LoginPage extends StatelessWidget {
                                           );
                                         },
                                       )
-                                    : Navigator.push(
+                                    : Navigator.pushNamedAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChangeNotifierProvider(
-                                            create: (context) =>
-                                                HomePageState(context),
-                                            child: const HomePage(),
-                                          ),
-                                        ));
+                                        '/home',
+                                        (route) => false,
+                                      );
                               }
                             },
                             style: ElevatedButton.styleFrom(
