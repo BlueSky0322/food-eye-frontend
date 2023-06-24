@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/ui/login_page/login_page.dart';
+import 'package:food_eye_fyp/ui/login_page/login_page_state.dart';
 import 'package:food_eye_fyp/ui/register_page/register_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -57,10 +59,10 @@ class RegisterPage extends StatelessWidget {
                     Text(
                       "Register",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontFamily: 'Outfit',
-                      ),
+                          color: Colors.white,
+                          fontSize: 48,
+                          fontFamily: 'Outfit',
+                          fontWeight: FontWeight.bold),
                     ),
                     Text(
                       "Create a new account.",
@@ -268,18 +270,106 @@ class RegisterPage extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               if (registerPageState.formKey.currentState!
-                                  .validate()) {}
+                                  .validate()) {
+                                registerPageState.register() != true
+                                    ? showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            backgroundColor:
+                                                Colors.white.withOpacity(0.9),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            content: Container(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(12.0),
+                                                      ),
+                                                      color: primaryBG,
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                              0, 0, 0, 16),
+                                                      child: Image.asset(
+                                                        'assets/images/newuser-logo.png',
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const Text(
+                                                    "Whoops!",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 32,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "We can\'t seem to find your account...",
+                                                    style: TextStyle(
+                                                      color:
+                                                          Colors.red.shade700,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 16,
+                                                  ),
+                                                  Text(
+                                                    "Make sure you are registered first!",
+                                                    style: TextStyle(
+                                                      color:
+                                                          Colors.red.shade700,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChangeNotifierProvider(
+                                            create: (context) =>
+                                                LoginPageState(context),
+                                            child: LoginPage(),
+                                          ),
+                                        ),
+                                      );
+                              }
                             },
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text("Register",
-                                    style: TextStyle(
-                                        fontFamily: 'Outfit',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24,
-                                        color: primaryBtnText)),
+                                Text(
+                                  "Register",
+                                  style: TextStyle(
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      color: primaryBtnText),
+                                ),
                               ],
                             ),
                           ),

@@ -186,9 +186,79 @@ class LoginPage extends StatelessWidget {
                             onPressed: () {
                               if (loginPageState.formKey.currentState!
                                   .validate()) {
-                                loginPageState.login() == null
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
+                                loginPageState.logintest() != true
+                                    ? showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            backgroundColor:
+                                                Colors.white.withOpacity(0.9),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            content: Container(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(12.0),
+                                                      ),
+                                                      color: primaryBG,
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                              0, 0, 0, 16),
+                                                      child: Image.asset(
+                                                        'assets/images/error-logo.png',
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const Text(
+                                                    "Whoops!",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 32,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "We can\'t seem to find your account...",
+                                                    style: TextStyle(
+                                                      color:
+                                                          Colors.red.shade700,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 16,
+                                                  ),
+                                                  Text(
+                                                    "Make sure you are registered first!",
+                                                    style: TextStyle(
+                                                      color:
+                                                          Colors.red.shade700,
+                                                      fontFamily: 'Outfit',
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       )
                                     : Navigator.push(
                                         context,

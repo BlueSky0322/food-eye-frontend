@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/ui/home_page/home_page.dart';
+import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
+import 'package:food_eye_fyp/ui/login_page/login_page.dart';
+import 'package:food_eye_fyp/ui/login_page/login_page_state.dart';
 import 'package:food_eye_fyp/ui/splash_page/splash_page.dart';
 import 'package:food_eye_fyp/ui/splash_page/splash_page_state.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +24,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-          create: (context) => SplashPageState(context),
-          child: const SplashPage()),
+          create: (context) => HomePageState(context), child: const HomePage()),
+      // create: (context) => SplashPageState(context),
+      // child: const SplashPage()),
     );
   }
 }

@@ -41,15 +41,26 @@ class LoginPageState extends ChangeNotifier {
     return null;
   }
 
+  bool logintest() {
+    if (email == 'a@a.c' && password == '123123') {
+      notifyListeners();
+      return true;
+    } else {
+      AuthUser user = AuthUser(email: email, password: password);
+      print(user.email + ":" + user.password);
+      return false;
+    }
+  }
+
   Future<bool?> login() async {
     // Create an instance of AuthUser
     AuthUser user = AuthUser(email: email, password: password);
-
+    print(user.email + ":" + user.password);
     // Call your login API using a service or HTTP client
     // Pass the user credentials and handle the response
     // ...
+
     if (email == 'a@a.c' && password == '123123') {
-      print(email + " " + password);
       notifyListeners();
       return true;
     }

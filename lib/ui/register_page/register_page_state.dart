@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/data/model/new_user.dart';
 
 class RegisterPageState extends ChangeNotifier {
   final BuildContext context;
@@ -83,5 +84,22 @@ class RegisterPageState extends ChangeNotifier {
     }
 
     return null;
+  }
+
+  bool register() {
+    NewUser newUser = NewUser(
+        email: email,
+        password: password,
+        name: name,
+        age: age,
+        address: address,
+        dateOfBirth: dateOfBirth);
+    print(newUser.email);
+    print(newUser.password);
+    print(newUser.name);
+    print(newUser.age);
+    print(newUser.address);
+    print(newUser.dateOfBirth);
+    return true;
   }
 }
