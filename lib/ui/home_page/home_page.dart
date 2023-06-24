@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Color.fromARGB(255, 142, 197, 241),
       elevation: 0,
       toolbarHeight: 70,
       title: const Align(
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
         child: Text(
           "Welcome Back!",
           style: TextStyle(
-              fontFamily: 'Outfit', fontSize: 20, color: Colors.white),
+              fontFamily: 'Outfit', fontSize: 20, color: Colors.black),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:food_eye_fyp/data/model/new_user.dart';
 class RegisterPageState extends ChangeNotifier {
   final BuildContext context;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   final ValueNotifier<bool> isPasswordVisible = ValueNotifier<bool>(false);
   String email = '';
   String password = '';
@@ -100,6 +101,7 @@ class RegisterPageState extends ChangeNotifier {
     print(newUser.age);
     print(newUser.address);
     print(newUser.dateOfBirth);
+    notifyListeners();
     return true;
   }
 }

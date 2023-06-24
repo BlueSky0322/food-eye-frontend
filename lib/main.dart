@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-          create: (context) => HomePageState(context), child: const HomePage()),
-      // create: (context) => SplashPageState(context),
-      // child: const SplashPage()),
+          // create: (context) => HomePageState(context), child: const HomePage()),
+          create: (context) => SplashPageState(context),
+          child: const SplashPage()),
     );
   }
 }
