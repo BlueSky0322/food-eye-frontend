@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/ui/home_page/home_page.dart';
-import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
-import 'package:food_eye_fyp/ui/login_page/login_page.dart';
-import 'package:food_eye_fyp/ui/login_page/login_page_state.dart';
+import 'package:food_eye_fyp/ui/common/nav_bar_state.dart';
+import 'package:food_eye_fyp/ui/common/nav_bar_wrapper.dart';
 import 'package:food_eye_fyp/ui/splash_page/splash_page.dart';
 import 'package:food_eye_fyp/ui/splash_page/splash_page_state.dart';
 import 'package:provider/provider.dart';
@@ -22,11 +20,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
         '/home': (context) => ChangeNotifierProvider(
-              create: (context) => HomePageState(context),
-              child: const HomePage(),
+              create: (context) => (NavBarState()),
+              child: const NavBarWrapper(),
+            ),
+        '/splash': (context) => ChangeNotifierProvider(
+              create: (context) => SplashPageState(context),
+              child: const SplashPage(),
             ),
       },
       home: ChangeNotifierProvider(

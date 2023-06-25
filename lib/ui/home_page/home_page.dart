@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,20 +13,38 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.lightBlue.shade100,
       appBar: AppBar(
-        backgroundColor: primaryBG,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 70,
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Welcome Back",
-            style: TextStyle(
-              fontFamily: 'Outfit',
-              fontSize: 28,
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
+        title: Row(
+          children: [
+            const Text(
+              "Welcome Back",
+              style: TextStyle(
+                fontFamily: 'Outfit',
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+                color: primaryBG,
+              ),
             ),
-          ),
+            const Spacer(),
+            IconButton(
+              onPressed: () {
+                // Perform avatar icon action
+              },
+              icon: Container(
+                width: 65,
+                height: 65,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/avatar.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       body: Column(
@@ -38,6 +55,12 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    'assets/images/card-bg-1.png',
+                  ),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -53,7 +76,7 @@ class HomePage extends StatelessWidget {
               ),
               padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 0, 16),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Flexible(
                     child: Column(
@@ -95,14 +118,6 @@ class HomePage extends StatelessWidget {
                               ]),
                         ),
                       ],
-                    ),
-                  ),
-                  const Text(
-                    "Text",
-                    style: TextStyle(
-                      fontFamily: 'Outfit',
-                      fontSize: 20,
-                      color: Colors.black,
                     ),
                   ),
                 ],
