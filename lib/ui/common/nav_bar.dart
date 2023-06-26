@@ -18,7 +18,7 @@ class NavBar extends StatelessWidget {
           label: 'Items',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.qr_code_scanner_sharp),
+          icon: Icon(Icons.my_library_add_outlined),
           label: 'Add item',
         ),
         BottomNavigationBarItem(

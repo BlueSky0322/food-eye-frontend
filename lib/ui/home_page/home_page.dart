@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../data/model/item.dart';
 import '../../utils/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -55,7 +56,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
                     'assets/images/card-bg-1.png',
@@ -122,6 +123,21 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+          Text("data"),
+          Expanded(
+            child: ListView.builder(
+              itemCount: itemList.length,
+              itemBuilder: (context, index) {
+                final item = itemList[index];
+                return ListTile(
+                  leading: Image.asset(item.imageUrl),
+                  title: Text(item.itemName),
+                  subtitle: Text('Quantity: ${item.quantity}'),
+                  trailing: Text('Expires on: ${item.dateExpiresOn}'),
+                );
+              },
             ),
           )
         ],
