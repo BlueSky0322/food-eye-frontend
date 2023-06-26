@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ItemImage extends StatelessWidget {
-  Widget? pickedImage;
+  ImageProvider pickedImage;
   final VoidCallback? onPressedPhoto;
   final VoidCallback? onPressedGallery;
 
@@ -23,7 +23,8 @@ class ItemImage extends StatelessWidget {
           radius: 80.0,
           backgroundColor: Colors.transparent,
           //display pickedImage if not null, else display asset image
-          child: pickedImage, // Display asset image if pickedImage is null
+          backgroundImage: pickedImage,
+          // Display asset image if pickedImage is null
         ),
         Positioned(
           bottom: 20.0,

@@ -20,7 +20,7 @@ class DateFormField extends StatelessWidget {
     required this.onPressed,
     required this.controller,
     //required this.currentValue,
-    required this.validator,
+    this.validator,
     required this.labelText,
     required this.hintText,
     required this.prefixicon,
@@ -44,7 +44,7 @@ class DateFormField extends StatelessWidget {
         ),
         style: TextStyle(
             color: Colors.teal.shade800,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: 'Outfit',
             fontWeight: FontWeight.w500),
         controller: controller,

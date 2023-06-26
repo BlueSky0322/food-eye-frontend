@@ -1,12 +1,12 @@
 class Item {
-  final String itemName;
-  final String itemType;
+  final String? itemName;
+  final String? itemType;
   final int quantity;
-  final DateTime datePurchased;
-  final DateTime dateExpiresOn;
-  final String imageUrl;
-  final String storageLocation;
-  final String description;
+  final DateTime? datePurchased;
+  final DateTime? dateExpiresOn;
+  String? imagePath;
+  final String? storedAt;
+  final String? description;
 
   Item({
     required this.itemName,
@@ -14,8 +14,8 @@ class Item {
     required this.quantity,
     required this.datePurchased,
     required this.dateExpiresOn,
-    required this.imageUrl,
-    required this.storageLocation,
+    this.imagePath,
+    required this.storedAt,
     required this.description,
   });
 }
@@ -27,8 +27,8 @@ final itemList = <Item>[
     quantity: 5,
     datePurchased: DateTime(2022, 12, 10),
     dateExpiresOn: DateTime(2022, 12, 15),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
+    imagePath: 'assets/images/fruit.png',
+    storedAt: "Pantry",
     description: 'Fresh and juicy apple',
   ),
   Item(
@@ -37,8 +37,8 @@ final itemList = <Item>[
     quantity: 3,
     datePurchased: DateTime(2022, 12, 8),
     dateExpiresOn: DateTime(2022, 12, 13),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
+    imagePath: 'assets/images/fruit.png',
+    storedAt: "Pantry",
     description: 'Sweet and nutritious banana',
   ),
   Item(
@@ -47,38 +47,8 @@ final itemList = <Item>[
     quantity: 2,
     datePurchased: DateTime(2022, 12, 12),
     dateExpiresOn: DateTime(2022, 12, 17),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
-    description: 'Tangy and refreshing orange',
-  ),
-  Item(
-    itemName: 'Orange',
-    itemType: 'Fruit',
-    quantity: 2,
-    datePurchased: DateTime(2022, 12, 12),
-    dateExpiresOn: DateTime(2022, 12, 17),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
-    description: 'Tangy and refreshing orange',
-  ),
-  Item(
-    itemName: 'Orange',
-    itemType: 'Fruit',
-    quantity: 2,
-    datePurchased: DateTime(2022, 12, 12),
-    dateExpiresOn: DateTime(2022, 12, 17),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
-    description: 'Tangy and refreshing orange',
-  ),
-  Item(
-    itemName: 'Orange',
-    itemType: 'Fruit',
-    quantity: 2,
-    datePurchased: DateTime(2022, 12, 12),
-    dateExpiresOn: DateTime(2022, 12, 17),
-    imageUrl: 'assets/images/fruit.png',
-    storageLocation: "Pantry",
+    imagePath: 'assets/images/fruit.png',
+    storedAt: "Pantry",
     description: 'Tangy and refreshing orange',
   ),
 ];

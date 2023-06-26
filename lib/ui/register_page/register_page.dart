@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/components/success_alert_dialog.dart';
 import 'package:food_eye_fyp/ui/login_page/login_page.dart';
 import 'package:food_eye_fyp/ui/login_page/login_page_state.dart';
 import 'package:food_eye_fyp/ui/register_page/register_page_state.dart';
@@ -275,68 +276,13 @@ class RegisterPage extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return AlertDialog(
-                                        backgroundColor:
-                                            Colors.white.withOpacity(0.9),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        content: Container(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Container(
-                                                decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(12.0),
-                                                  ),
-                                                  color: primaryBG,
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                          0, 0, 0, 16),
-                                                  child: Image.asset(
-                                                    'assets/images/error-logo.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                              const Text(
-                                                "Whoops!",
-                                                style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 32,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                "Something went wrong...",
-                                                style: TextStyle(
-                                                  color: Colors.red.shade700,
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 16,
-                                              ),
-                                              Text(
-                                                "Sorry, but please try again later!",
-                                                style: TextStyle(
-                                                  color: Colors.red.shade700,
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      return const CustomSuccessAlertDialog(
+                                        imageAsset:
+                                            'assets/images/error-logo.png',
+                                        title: "Whoops!",
+                                        subtitle: "Something went wrong...",
+                                        description:
+                                            "Sorry, but please try again later!",
                                       );
                                     },
                                   );
@@ -345,75 +291,13 @@ class RegisterPage extends StatelessWidget {
                                   await showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return AlertDialog(
-                                        backgroundColor:
-                                            Colors.white.withOpacity(0.9),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        content: IntrinsicHeight(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(12.0),
-                                                    ),
-                                                    color: primaryBG,
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                            0, 0, 0, 16),
-                                                    child: Image.asset(
-                                                      'assets/images/newuser-logo.png',
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Text(
-                                                  "Congratulations!",
-                                                  style: TextStyle(
-                                                    color: Colors.green,
-                                                    fontFamily: 'Outfit',
-                                                    fontSize: 32,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Registration successful!",
-                                                  style: TextStyle(
-                                                    color:
-                                                        Colors.green.shade700,
-                                                    fontFamily: 'Outfit',
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "You can now log in with your new account.",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color:
-                                                        Colors.green.shade700,
-                                                    fontFamily: 'Outfit',
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                      return const CustomSuccessAlertDialog(
+                                        imageAsset:
+                                            'assets/images/newuser-logo.png',
+                                        title: "Congratulations",
+                                        subtitle: "Registration successful!",
+                                        description:
+                                            "You can now log in with your new account.",
                                       );
                                     },
                                   ).then((_) {

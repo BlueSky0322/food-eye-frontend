@@ -132,8 +132,10 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final item = itemList[index];
                 return ListTile(
-                  leading: Image.asset(item.imageUrl),
-                  title: Text(item.itemName),
+                  leading: item.imagePath != null
+                      ? Image.asset(item.imagePath!)
+                      : SizedBox.shrink(),
+                  title: Text(item.itemName ?? ''),
                   subtitle: Text('Quantity: ${item.quantity}'),
                   trailing: Text('Expires on: ${item.dateExpiresOn}'),
                 );

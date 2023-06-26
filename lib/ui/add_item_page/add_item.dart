@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/components/error_alert_dialog.dart';
 import 'package:food_eye_fyp/ui/add_item_page/components/date_field.dart';
 import 'package:food_eye_fyp/ui/add_item_page/add_item_state.dart';
 import 'package:food_eye_fyp/ui/add_item_page/components/item_desc_field.dart';
@@ -12,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/success_alert_dialog.dart';
 import '../../utils/constants.dart';
 import 'components/item_name_field.dart';
 
@@ -22,14 +24,12 @@ class AddItemPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<AddItemState>(context);
     final ImagePicker picker = ImagePicker();
-    XFile? imageFile;
-    TextEditingController purchasedDateController = TextEditingController(
-        text: DateFormat('dd/MM/yyyy').format(DateTime.now()));
+    TextEditingController purchasedDateController = TextEditingController();
     TextEditingController expiryDateController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.lightBlue.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 167, 216, 230),
         elevation: 0,
         toolbarHeight: 70,
         title: const Text(
@@ -46,130 +46,213 @@ class AddItemPage extends StatelessWidget {
           child: Column(
         children: [
           Expanded(
-              child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(32, 16, 32, 20),
-              child: Column(
-                children: [
-                  Form(
-                    key: state.formKey,
-                    child: Column(
-                      children: [
-                        ItemImage(
-                          pickedImage: state.imageFile != null
-                              ? Image.file(
-                                  File(state.imageFile!.path),
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.asset(
-                                  'assets/images/image-placeholder.png',
-                                  fit: BoxFit.cover,
-                                ),
-                          onPressedGallery: () async {
-                            state.selectPhoto(ImageSource.gallery, picker);
-                          },
-                          onPressedPhoto: () {},
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ItemNameFormField(
-                            onChanged: (s) => state.itemName = s,
-                            currentValue: state.itemName),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ItemTypeFormField(
-                          onChanged: (s) => state.itemType = s,
-                          currentValue: state.itemType,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ItemQuantityFormField(
-                          onChanged: (String value) {
-                            if (value.isNotEmpty) {
-                              int quantity = int.parse(value);
-                              state.quantity = quantity;
-                            } else {
-                              return;
-                            }
-                          },
-                          currentValue: state.quantity.toString(),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        DateFormField(
-                          controller: purchasedDateController,
-                          onChanged: (String value) {
-                            state.datePurchased = DateTime.parse(value);
-                          },
-                          onPressed: () async {
-                            final selectedDate =
-                                await state.selectDate(context, 0);
-                            if (selectedDate != null) {
-                              // Update the value or perform any necessary actions
-                              state.datePurchased = selectedDate;
-                              purchasedDateController.text =
-                                  DateFormat('dd/MM/yyyy').format(selectedDate);
-                            }
-                          },
-                          //currentValue: state.datePurchased,
-                          validator: (value) {
-                            final selectedDate = DateTime.tryParse(value ?? '');
-                            return state.validateDate(selectedDate);
-                          },
-                          labelText: "Purchased On",
-                          hintText: "Enter date of purchase",
-                          prefixicon: Icons.add_circle_outline,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        DateFormField(
-                          controller: expiryDateController,
-                          onChanged: (String value) {
-                            state.dateExpiresOn = DateTime.parse(value);
-                          },
-                          onPressed: () async {
-                            final selectedDate =
-                                await state.selectDate(context, 1);
-                            if (selectedDate != null) {
-                              // Update the value or perform any necessary actions
-                              state.dateExpiresOn = selectedDate;
-                              expiryDateController.text =
-                                  DateFormat('dd/MM/yyyy').format(selectedDate);
-                            }
-                          },
-                          //currentValue: state.datePurchased,
-                          validator: (value) {
-                            final selectedDate = DateTime.tryParse(value ?? '');
-                            return state.validateDate(selectedDate);
-                          },
-                          labelText: "Expires on",
-                          hintText: "Enter expiry date",
-                          prefixicon: Icons.error_outline_rounded,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ItemStorageFormField(
-                          onChanged: (s) => state.storedAt = s,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        ItemDescFormField(
-                          onChanged: (s) => state.description = s,
-                        ),
-                      ],
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(32, 16, 32, 20),
+                child: Column(
+                  children: [
+                    Form(
+                      key: state.formKey,
+                      child: Column(
+                        children: [
+                          ItemImage(
+                            // pickedImage: ,
+                            pickedImage: state.pickedImage,
+                            onPressedGallery: () async {
+                              state.selectPhoto(ImageSource.gallery, picker);
+                            },
+                            onPressedPhoto: () {
+                              state.selectPhoto(ImageSource.camera, picker);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ItemNameFormField(
+                              validator: (s) => state.validateIfEmpty(s),
+                              onChanged: (s) => state.itemName = s,
+                              currentValue: state.itemName),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ItemTypeFormField(
+                            validator: (s) => state.validateIfEmpty(s),
+                            onChanged: (s) => state.itemType = s,
+                            currentValue: state.itemType,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ItemQuantityFormField(
+                            validator: (s) => state.validateQuantity(s),
+                            onChanged: (String value) {
+                              if (value.isNotEmpty) {
+                                int quantity = int.parse(value);
+                                state.quantity = quantity;
+                              } else {
+                                return;
+                              }
+                            },
+                            currentValue: state.quantity.toString(),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          DateFormField(
+                            validator: (value) {
+                              final selectedDate =
+                                  DateTime.tryParse(value ?? '');
+                              return state.validateDate(selectedDate);
+                            },
+                            onChanged: (String value) {
+                              state.datePurchased = DateTime.parse(value);
+                            },
+                            controller: purchasedDateController,
+                            onPressed: () async {
+                              final selectedDate =
+                                  await state.selectDate(context, 0);
+                              if (selectedDate != null) {
+                                // Update the value or perform any necessary actions
+                                state.datePurchased = selectedDate;
+                                purchasedDateController.text =
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(selectedDate);
+                              }
+                            },
+                            labelText: "Purchased On",
+                            hintText: "Enter date of purchase",
+                            prefixicon: Icons.add_circle_outline,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          DateFormField(
+                            controller: expiryDateController,
+                            validator: (value) {
+                              final selectedDate =
+                                  DateTime.tryParse(value ?? '');
+                              return state.validateDate(selectedDate);
+                            },
+                            onChanged: (String value) {
+                              state.dateExpiresOn = DateTime.parse(value);
+                            },
+                            onPressed: () async {
+                              final selectedDate =
+                                  await state.selectDate(context, 1);
+                              if (selectedDate != null) {
+                                // Update the value or perform any necessary actions
+                                state.dateExpiresOn = selectedDate;
+                                expiryDateController.text =
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(selectedDate);
+                              }
+                            },
+                            //currentValue: state.datePurchased,
+                            labelText: "Expires on",
+                            hintText: "Enter expiry date",
+                            prefixicon: Icons.error_outline_rounded,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ItemStorageFormField(
+                            validator: (s) => state.validateIfEmpty(s),
+                            onChanged: (s) => state.storedAt = s,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          ItemDescFormField(
+                            onChanged: (s) => state.description = s,
+                          ),
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Container(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).primaryColor),
+                        onPressed: () async {
+                          if (state.formKey.currentState!.validate()) {
+                            if (await state.addNewItem() != true) {
+                              Future.microtask(() {
+                                showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return const CustomErrorAlertDialog(
+                                      imageAsset:
+                                          'assets/images/error-logo.png',
+                                      title: "Whoops!",
+                                      subtitle: "Something went wrong...",
+                                      description:
+                                          "Sorry, but please try again later!",
+                                    );
+                                  },
+                                );
+                              });
+                            } else {
+                              Future.microtask(() async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return const CustomSuccessAlertDialog(
+                                      imageAsset:
+                                          'assets/images/newitem-logo.png',
+                                      title: "Success!",
+                                      subtitle: "Item Added",
+                                      description:
+                                          "The item has been successfully added to your inventory.",
+                                    );
+                                  },
+                                );
+                                // Navigator.pushReplacement(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         ChangeNotifierProvider(
+                                //       create: (context) =>
+                                //           LoginPageState(context),
+                                //       child: LoginPage(),
+                                //     ),
+                                //   ),
+                                // );
+                              });
+                            }
+                          }
+                        },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Icon(
+                              Icons.check_circle_outline_rounded,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              "Add new item",
+                              style: TextStyle(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ))
+          ),
         ],
       )),
     );

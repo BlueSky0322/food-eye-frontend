@@ -5,11 +5,13 @@ import '../../../components/input_decoration_additem.dart';
 
 class ItemQuantityFormField extends StatelessWidget {
   final ValueChanged<String> onChanged;
+  final FormFieldValidator<String>? validator;
   final String? currentValue;
 
   const ItemQuantityFormField({
     super.key,
     required this.onChanged,
+    this.validator,
     required this.currentValue,
   });
 
@@ -17,6 +19,7 @@ class ItemQuantityFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: currentValue,
+      validator: validator,
       keyboardType: TextInputType.number, // Updated keyboardType
       decoration: AddItemInputDecoration.addItemInputDecoration(
         hintText: "Enter the quantity",

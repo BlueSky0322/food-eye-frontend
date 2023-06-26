@@ -4,17 +4,20 @@ import '../../../components/input_decoration_additem.dart';
 
 class ItemTypeFormField extends StatelessWidget {
   final ValueChanged<String?> onChanged;
+  final FormFieldValidator<String>? validator;
   final String? currentValue;
 
   const ItemTypeFormField({
     Key? key,
     required this.onChanged,
     required this.currentValue,
+    required this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      validator: validator,
       value: currentValue,
       decoration: AddItemInputDecoration.addItemInputDecoration(
         hintText: "Select Type",
@@ -24,7 +27,7 @@ class ItemTypeFormField extends StatelessWidget {
       ),
       style: TextStyle(
           color: Colors.teal.shade600,
-          fontSize: 18,
+          fontSize: 16,
           fontFamily: 'Outfit',
           fontWeight: FontWeight.w500),
       items: const [

@@ -1,21 +1,25 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../data/model/item.dart';
 
 class AddItemState extends ChangeNotifier {
   BuildContext context;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<State> dialogKey = GlobalKey<State>();
   static const _100_YEARS = Duration(days: 365 * 100);
-  XFile? imageFile;
-
+  XFile? _imageFile;
   String? itemName;
   String? itemType;
-  int quantity = 0;
-  DateTime datePurchased = DateTime.now();
-  DateTime dateExpiresOn = DateTime(2022, 12, 15);
+  int quantity = 1;
+  DateTime? datePurchased;
+  DateTime? dateExpiresOn;
   String? storedAt;
   String? description;
-
+  XFile? get imageFile => _imageFile;
   //List<Item> _itemList = [];
   AddItemState(this.context);
 
@@ -39,6 +43,13 @@ class AddItemState extends ChangeNotifier {
     return null;
   }
 
+  String? validateIfEmpty(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field cannot be blank';
+    }
+    return null;
+  }
+
   Future<DateTime?> selectDate(BuildContext context, int selectRange) async {
     final selectedDate = await showDatePicker(
       context: context,
@@ -50,10 +61,67 @@ class AddItemState extends ChangeNotifier {
     return selectedDate;
   }
 
-  Future selectPhoto(ImageSource source, ImagePicker picker) async {
-    imageFile = await picker.pickImage(
+  ImageProvider<Object> get pickedImage {
+    if (_imageFile != null) {
+      return Image.file(
+        File(_imageFile!.path),
+        fit: BoxFit.cover,
+      ).image;
+    } else {
+      return const AssetImage(
+        'assets/images/image-placeholder.png',
+      );
+    }
+  }
+
+  void selectPhoto(ImageSource source, ImagePicker picker) async {
+    final pickedImage = await picker.pickImage(
       source: source,
     );
+    _imageFile = pickedImage;
     notifyListeners();
+  }
+
+  Future<bool> addNewItem() async {
+    // Validate form fields
+    if (!formKey.currentState!.validate()) {
+      return false;
+    }
+
+    try {
+      // Create your objects here
+      // For example, you can create a new Item object with the provided data
+      Item newItem = Item(
+        itemName: itemName,
+        itemType: itemType,
+        quantity: quantity,
+        datePurchased: datePurchased,
+        dateExpiresOn: dateExpiresOn,
+        storedAt: storedAt,
+        description: description,
+        // Set the imageFile path if available
+        imagePath: imageFile != null ? imageFile!.path : null,
+      );
+
+      // Print the captured data to the console
+      print('New Item Data:');
+      print('Item Name: ${newItem.itemName}');
+      print('Item Type: ${newItem.itemType}');
+      print('Quantity: ${newItem.quantity}');
+      print('Date Purchased: ${newItem.datePurchased}');
+      print('Expires On: ${newItem.dateExpiresOn}');
+      print('Stored At: ${newItem.storedAt}');
+      print('Description: ${newItem.description}');
+      print('Image Path: ${newItem.imagePath}');
+
+      // Perform any necessary operations, such as saving to a database or API call
+
+      // Return true to indicate that the item was successfully created
+      return true;
+    } catch (error) {
+      // Handle any errors that occur during the creation process
+      print('Error creating item: $error');
+      return false;
+    }
   }
 }
