@@ -10,6 +10,7 @@ class DateFormField extends StatelessWidget {
   final VoidCallback? onPressed;
   final FormFieldValidator<String>? validator;
   final IconData? prefixicon;
+  final IconData? suffixIcon;
   //final DateTime? currentValue;
   final String labelText;
   final String hintText;
@@ -24,6 +25,7 @@ class DateFormField extends StatelessWidget {
     required this.labelText,
     required this.hintText,
     required this.prefixicon,
+    required this.suffixIcon,
   });
 
   @override
@@ -37,7 +39,7 @@ class DateFormField extends StatelessWidget {
           labelText: labelText,
           prefixIcon: prefixicon,
           suffixIcon: IconButton(
-            icon: const Icon(Icons.calendar_today),
+            icon: Icon(suffixIcon),
             color: primaryBG,
             onPressed: onPressed,
           ),

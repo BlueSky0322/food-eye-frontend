@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/error_alert_dialog.dart';
+import 'package:food_eye_fyp/components/input_selection_dialog.dart';
 import 'package:food_eye_fyp/ui/add_item_page/components/date_field.dart';
 import 'package:food_eye_fyp/ui/add_item_page/add_item_state.dart';
 import 'package:food_eye_fyp/ui/add_item_page/components/item_desc_field.dart';
@@ -127,6 +128,7 @@ class AddItemPage extends StatelessWidget {
                             labelText: "Purchased On",
                             hintText: "Enter date of purchase",
                             prefixicon: Icons.add_circle_outline,
+                            suffixIcon: Icons.calendar_today_rounded,
                           ),
                           const SizedBox(
                             height: 16,
@@ -142,20 +144,30 @@ class AddItemPage extends StatelessWidget {
                               state.dateExpiresOn = DateTime.parse(value);
                             },
                             onPressed: () async {
-                              final selectedDate =
-                                  await state.selectDate(context, 1);
-                              if (selectedDate != null) {
-                                // Update the value or perform any necessary actions
-                                state.dateExpiresOn = selectedDate;
-                                expiryDateController.text =
-                                    DateFormat('yyyy-MM-dd')
-                                        .format(selectedDate);
+                              final selectedOption = await showDialog<int>(
+                                  context: context,
+                                  builder: (context) {
+                                    return const InputSelectionDailog();
+                                  });
+
+                              if (selectedOption == 0) {
+                              } else if (selectedOption == 1) {
+                                final selectedDate =
+                                    await state.selectDate(context, 1);
+                                if (selectedDate != null) {
+                                  // Update the value or perform any necessary actions
+                                  state.dateExpiresOn = selectedDate;
+                                  expiryDateController.text =
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(selectedDate);
+                                }
                               }
                             },
                             //currentValue: state.datePurchased,
                             labelText: "Expires on",
                             hintText: "Enter expiry date",
                             prefixicon: Icons.error_outline_rounded,
+                            suffixIcon: Icons.pending_rounded,
                           ),
                           const SizedBox(
                             height: 16,
@@ -215,17 +227,6 @@ class AddItemPage extends StatelessWidget {
                                     );
                                   },
                                 );
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         ChangeNotifierProvider(
-                                //       create: (context) =>
-                                //           LoginPageState(context),
-                                //       child: LoginPage(),
-                                //     ),
-                                //   ),
-                                // );
                               });
                             }
                           }

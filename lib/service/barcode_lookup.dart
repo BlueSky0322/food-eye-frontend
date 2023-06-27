@@ -24,7 +24,7 @@ class BarcodeLookupService {
       final productName = result['product']['name'];
       return productName;
     } else {
-      return "";
+      return code;
     }
   }
 }

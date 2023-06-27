@@ -40,8 +40,16 @@ class ItemTypeFormField extends StatelessWidget {
           child: Text('Meat and Seafood'),
         ),
         DropdownMenuItem<String>(
-          value: 'Dairy and Refrigerated',
+          value: 'Refrigerated',
           child: Text('Refrigerated'),
+        ),
+        DropdownMenuItem<String>(
+          value: 'Snack Foods',
+          child: Text('Snack Foods'),
+        ),
+        DropdownMenuItem<String>(
+          value: 'Canned Goods',
+          child: Text('Canned Goods'),
         ),
         DropdownMenuItem<String>(
           value: 'Non-perishables',

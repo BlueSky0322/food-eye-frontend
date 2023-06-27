@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:food_eye_fyp/service/barcode_lookup.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../data/model/item.dart';
@@ -12,9 +13,10 @@ class AddItemState extends ChangeNotifier {
   TextEditingController itemNameController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<State> dialogKey = GlobalKey<State>();
+  final _barcodeLookupService = BarcodeLookupService();
   static const _100_YEARS = Duration(days: 365 * 100);
-  XFile? _imageFile;
 
+  XFile? _imageFile;
   String? _scannedName;
   String? itemName;
   String? itemType;
@@ -24,6 +26,7 @@ class AddItemState extends ChangeNotifier {
   String? storedAt;
   String? description;
   XFile? get imageFile => _imageFile;
+
   //List<Item> _itemList = [];
   AddItemState(this.context);
 
@@ -93,11 +96,20 @@ class AddItemState extends ChangeNotifier {
         'Cancel',
         true,
         ScanMode.BARCODE,
-      );
-      itemName = _scannedName;
-      itemNameController.text = itemName!;
-      print(_scannedName);
-      notifyListeners();
+      ).then((value) {
+        if (value == -1) {
+          return null;
+        }
+      });
+
+      await _barcodeLookupService
+          .lookupProductName(code: _scannedName!)
+          .then((productName) {
+        itemName = productName;
+        itemNameController.text = itemName!;
+        print(itemName);
+        notifyListeners();
+      });
     } on PlatformException {
       _scannedName = "Error";
     }
