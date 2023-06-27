@@ -26,6 +26,7 @@ class AddItemPage extends StatelessWidget {
     final ImagePicker picker = ImagePicker();
     TextEditingController purchasedDateController = TextEditingController();
     TextEditingController expiryDateController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.lightBlue.shade100,
       appBar: AppBar(
@@ -69,9 +70,13 @@ class AddItemPage extends StatelessWidget {
                             height: 16,
                           ),
                           ItemNameFormField(
-                              validator: (s) => state.validateIfEmpty(s),
-                              onChanged: (s) => state.itemName = s,
-                              currentValue: state.itemName),
+                            controller: state.itemNameController,
+                            validator: (s) => state.validateIfEmpty(s),
+                            onChanged: (s) => state.itemName = s,
+                            onTap: () {
+                              state.scanBarcodeNormal();
+                            },
+                          ),
                           const SizedBox(
                             height: 16,
                           ),

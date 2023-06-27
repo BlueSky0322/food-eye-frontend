@@ -7,7 +7,7 @@ class AddItemInputDecoration {
     required String hintText,
     required String labelText,
     required IconData? prefixIcon,
-    required IconButton? suffixIcon,
+    required Widget? suffixIcon,
   }) {
     return InputDecoration(
       border: const OutlineInputBorder(),

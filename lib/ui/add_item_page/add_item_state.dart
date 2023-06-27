@@ -1,17 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../data/model/item.dart';
 
 class AddItemState extends ChangeNotifier {
   BuildContext context;
-
+  TextEditingController itemNameController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<State> dialogKey = GlobalKey<State>();
   static const _100_YEARS = Duration(days: 365 * 100);
   XFile? _imageFile;
+
+  String? _scannedName;
   String? itemName;
   String? itemType;
   int quantity = 1;
@@ -80,6 +84,23 @@ class AddItemState extends ChangeNotifier {
     );
     _imageFile = pickedImage;
     notifyListeners();
+  }
+
+  Future<void> scanBarcodeNormal() async {
+    try {
+      _scannedName = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,
+      );
+      itemName = _scannedName;
+      itemNameController.text = itemName!;
+      print(_scannedName);
+      notifyListeners();
+    } on PlatformException {
+      _scannedName = "Error";
+    }
   }
 
   Future<bool> addNewItem() async {

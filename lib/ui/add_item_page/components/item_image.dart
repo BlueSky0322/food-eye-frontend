@@ -30,7 +30,7 @@ class ItemImage extends StatelessWidget {
           bottom: 20.0,
           right: 0.0,
           child: CircleAvatar(
-            radius: 20.0,
+            radius: 25.0,
             backgroundColor: Colors.teal.shade800,
             child: InkWell(
               onTap: () {
@@ -39,10 +39,12 @@ class ItemImage extends StatelessWidget {
                   builder: ((builder) => bottomSheet(context)),
                 );
               },
-              child: const Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 28.0,
+              child: const Center(
+                child: Icon(
+                  Icons.add_a_photo_rounded,
+                  color: Colors.white,
+                  size: 28.0,
+                ),
               ),
             ),
           ),
@@ -106,10 +108,4 @@ class ItemImage extends StatelessWidget {
       ),
     );
   }
-
-  // void takePhoto(ImageSource source) async {
-  //   pickedImage = await _picker.pickImage(
-  //     source: source,
-  //   );
-  // }
 }
