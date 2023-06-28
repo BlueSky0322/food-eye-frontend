@@ -20,35 +20,6 @@ class Item {
   });
 }
 
-final itemList = <Item>[
-  Item(
-    itemName: 'Apple',
-    itemType: 'Fruit',
-    quantity: 5,
-    datePurchased: DateTime(2022, 12, 10),
-    dateExpiresOn: DateTime(2022, 12, 15),
-    imagePath: 'assets/images/fruit.png',
-    storedAt: "Pantry",
-    description: 'Fresh and juicy apple',
-  ),
-  Item(
-    itemName: 'Banana',
-    itemType: 'Fruit',
-    quantity: 3,
-    datePurchased: DateTime(2022, 12, 8),
-    dateExpiresOn: DateTime(2022, 12, 13),
-    imagePath: 'assets/images/fruit.png',
-    storedAt: "Pantry",
-    description: 'Sweet and nutritious banana',
-  ),
-  Item(
-    itemName: 'Orange',
-    itemType: 'Fruit',
-    quantity: 2,
-    datePurchased: DateTime(2022, 12, 12),
-    dateExpiresOn: DateTime(2022, 12, 17),
-    imagePath: 'assets/images/fruit.png',
-    storedAt: "Pantry",
-    description: 'Tangy and refreshing orange',
-  ),
-];
+// final itemList = <Item>[
+  
+// ];

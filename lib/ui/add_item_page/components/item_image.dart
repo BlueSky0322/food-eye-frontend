@@ -31,7 +31,7 @@ class ItemImage extends StatelessWidget {
           right: 0.0,
           child: CircleAvatar(
             radius: 25.0,
-            backgroundColor: Colors.teal.shade800,
+            backgroundColor: Theme.of(context).primaryColor,
             child: InkWell(
               onTap: () {
                 showModalBottomSheet(

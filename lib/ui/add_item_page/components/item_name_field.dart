@@ -30,7 +30,7 @@ class ItemNameFormField extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
           child: CircleAvatar(
             radius: 25.0,
-            backgroundColor: Colors.teal.shade800,
+            backgroundColor: Theme.of(context).primaryColor,
             child: InkWell(
               onTap: onTap,
               // child:

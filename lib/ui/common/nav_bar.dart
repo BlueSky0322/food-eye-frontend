@@ -11,7 +11,8 @@ class NavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<NavBarState>(context);
     return BottomNavigationBar(
-      backgroundColor: primaryBG,
+      backgroundColor: appbar,
+      elevation: 3,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.apps_rounded),
@@ -28,9 +29,9 @@ class NavBar extends StatelessWidget {
       ],
       type: BottomNavigationBarType.fixed,
       currentIndex: state.selectedIndex,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white30,
-      iconSize: 40,
+      selectedItemColor: Colors.teal,
+      unselectedItemColor: primaryBG,
+      iconSize: 25,
       onTap: (index) => state.selectedIndex = index,
     );
   }

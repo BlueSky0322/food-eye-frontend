@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/components/list_tile.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+// import '../../data/model/item.dart';
 import '../../data/model/item.dart';
 import '../../utils/constants.dart';
 
@@ -12,10 +14,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<HomePageState>(context);
     return Scaffold(
-      backgroundColor: Colors.lightBlue.shade100,
+      backgroundColor: pageBG,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: appbar,
+        elevation: 1,
         toolbarHeight: 70,
         title: Row(
           children: [
@@ -128,17 +130,21 @@ class HomePage extends StatelessWidget {
           Text("data"),
           Expanded(
             child: ListView.builder(
-              itemCount: itemList.length,
+              itemCount: state.itemList.length,
               itemBuilder: (context, index) {
-                final item = itemList[index];
-                return ListTile(
-                  leading: item.imagePath != null
-                      ? Image.asset(item.imagePath!)
-                      : SizedBox.shrink(),
-                  title: Text(item.itemName ?? ''),
-                  subtitle: Text('Quantity: ${item.quantity}'),
-                  trailing: Text('Expires on: ${item.dateExpiresOn}'),
+                final item = state.itemList[index];
+                return CustomListTile(
+                  item: item,
                 );
+                // return ListTile(
+                //   leading: item.imagePath != null
+                //       ? Image.asset(item.imagePath!)
+                //       : const SizedBox.shrink(),
+                //   title: Text(item.itemName ?? ''),
+                //   subtitle: Text('Quantity: ${item.quantity}'),
+                //   trailing: Text(
+                //       'Expires on: ${DateFormat('yyyy-MM-dd').format(item.dateExpiresOn!)}'),
+                // );
               },
             ),
           )

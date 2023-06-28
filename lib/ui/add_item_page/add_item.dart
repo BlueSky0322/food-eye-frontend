@@ -29,9 +29,9 @@ class AddItemPage extends StatelessWidget {
     TextEditingController expiryDateController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Colors.lightBlue.shade100,
+      backgroundColor: pageBG,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 167, 216, 230),
+        backgroundColor: appbar,
         elevation: 0,
         toolbarHeight: 70,
         title: const Text(

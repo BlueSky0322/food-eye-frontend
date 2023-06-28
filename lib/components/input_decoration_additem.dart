@@ -10,7 +10,8 @@ class AddItemInputDecoration {
     required Widget? suffixIcon,
   }) {
     return InputDecoration(
-      border: const OutlineInputBorder(),
+      border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16.0))),
       enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: primaryBG),
       ),
@@ -30,9 +31,9 @@ class AddItemInputDecoration {
       ),
       labelText: labelText,
       labelStyle: const TextStyle(
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Outfit',
-        color: primaryBG,
+        color: addItemField,
       ),
       errorStyle: const TextStyle(
         fontSize: 14,
