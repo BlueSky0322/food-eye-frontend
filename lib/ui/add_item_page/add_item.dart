@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/error_alert_dialog.dart';
 import 'package:food_eye_fyp/components/input_selection_dialog.dart';

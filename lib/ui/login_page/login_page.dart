@@ -1,11 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/input_decoration.dart';
-import 'package:food_eye_fyp/ui/home_page/home_page.dart';
-import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/constants.dart';
 import '../register_page/register_page.dart';
 import '../register_page/register_page_state.dart';

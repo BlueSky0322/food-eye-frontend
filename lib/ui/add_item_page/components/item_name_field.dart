@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/input_decoration_additem.dart';
-import '../../../utils/constants.dart';
 
 class ItemNameFormField extends StatelessWidget {
   final ValueChanged<String> onChanged;

@@ -1,13 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-
-import '../../../data/model/item.dart';
 import '../../../data/model/item_response.dart';
 
 class CustomListTile extends StatelessWidget {

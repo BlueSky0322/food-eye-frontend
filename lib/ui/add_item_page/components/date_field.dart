@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../components/input_decoration_additem.dart';
 import '../../../utils/constants.dart';
 
 class DateFormField extends StatelessWidget {
-  static const _100_YEARS = Duration(days: 365 * 100);
   final ValueChanged<String> onChanged;
   final VoidCallback? onPressed;
   final FormFieldValidator<String>? validator;

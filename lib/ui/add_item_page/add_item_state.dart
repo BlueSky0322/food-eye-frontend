@@ -101,9 +101,11 @@ class AddItemState extends ChangeNotifier {
         true,
         ScanMode.BARCODE,
       ).then((value) {
+        // ignore: unrelated_type_equality_checks
         if (value == -1) {
           return null;
         }
+        return null;
       });
 
       await _barcodeLookupService
