@@ -9,4 +9,5 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-const localhostURL = "https://10.0.2.2:7187";
+const emulatorURL = "https://10.0.2.2:44317";
+const usbDebugURL = "https://192.168.1.110:45455";
