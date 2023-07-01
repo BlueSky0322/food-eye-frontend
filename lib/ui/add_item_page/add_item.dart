@@ -196,8 +196,51 @@ class AddItemPage extends StatelessWidget {
                             backgroundColor: Theme.of(context).primaryColor),
                         onPressed: () async {
                           if (state.formKey.currentState!.validate()) {
-                            if (await state.addNewItem() != true) {
-                              Future.microtask(() {
+                            showDialog(
+                              context: context,
+                              builder: (dialogContext) {
+                                return const Dialog(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        CircularProgressIndicator(),
+                                        SizedBox(height: 16.0),
+                                        Text(
+                                          'Adding Item...',
+                                          style: TextStyle(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              barrierDismissible: false,
+                            );
+
+                            bool success = await state.addNewItem();
+                            Navigator.pop(context); // Close the progress dialog
+
+                            Future.microtask(() {
+                              if (success) {
+                                showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return const CustomSuccessAlertDialog(
+                                      imageAsset:
+                                          'assets/images/newitem-logo.png',
+                                      title: "Success!",
+                                      subtitle: "Item Added",
+                                      description:
+                                          "The item has been successfully added to your inventory.",
+                                    );
+                                  },
+                                );
+                              } else {
                                 showDialog(
                                   context: context,
                                   builder: (dialogContext) {
@@ -211,24 +254,8 @@ class AddItemPage extends StatelessWidget {
                                     );
                                   },
                                 );
-                              });
-                            } else {
-                              Future.microtask(() async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (dialogContext) {
-                                    return const CustomSuccessAlertDialog(
-                                      imageAsset:
-                                          'assets/images/newitem-logo.png',
-                                      title: "Success!",
-                                      subtitle: "Item Added",
-                                      description:
-                                          "The item has been successfully added to your inventory.",
-                                    );
-                                  },
-                                );
-                              });
-                            }
+                              }
+                            });
                           }
                         },
                         child: const Row(

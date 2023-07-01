@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_eye_fyp/service/barcode_lookup.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../data/model/item.dart';
+import '../../utils/http_utils.dart';
 
 class AddItemState extends ChangeNotifier {
   BuildContext context;
@@ -14,6 +17,7 @@ class AddItemState extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<State> dialogKey = GlobalKey<State>();
   final _barcodeLookupService = BarcodeLookupService();
+  final client = Client();
   static const _100_YEARS = Duration(days: 365 * 100);
 
   XFile? _imageFile;
@@ -133,28 +137,81 @@ class AddItemState extends ChangeNotifier {
         storedAt: storedAt,
         description: description,
         // Set the imageFile path if available
-        imagePath: imageFile != null ? imageFile!.path : null,
+        imagePath: imageFile != null
+            ? imageFile!.path
+            : 'assets/images/image-placeholder.png',
       );
 
-      // Print the captured data to the console
-      print('New Item Data:');
-      print('Item Name: ${newItem.itemName}');
-      print('Item Type: ${newItem.itemType}');
-      print('Quantity: ${newItem.quantity}');
-      print('Date Purchased: ${newItem.datePurchased}');
-      print('Expires On: ${newItem.dateExpiresOn}');
-      print('Stored At: ${newItem.storedAt}');
-      print('Description: ${newItem.description}');
-      print('Image Path: ${newItem.imagePath}');
+      // Convert the Item object to JSON
+      final jsonData = json.encode(newItem.toJson());
 
-      // Perform any necessary operations, such as saving to a database or API call
+//      Make the POST request
+      // final response = await client.post(
+      //   Uri.parse("$emulatorURL/api/FoodEyeItems/AddFEItem"),
+      //   headers: {"Content-Type": "application/json"},
+      //   body: jsonData,
+      // );
 
-      // Return true to indicate that the item was successfully created
-      return true;
+      // Make the POST request
+      final response = await client.post(
+        Uri.parse("$usbDebugURL/api/FoodEyeItems/AddFEItem"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonData,
+      );
+
+      if (response.statusCode == 201) {
+        print('Item added successfully!');
+        return true;
+      } else {
+        print('API call failed with status code: ${response.statusCode}');
+        return false;
+      }
     } catch (error) {
-      // Handle any errors that occur during the creation process
       print('Error creating item: $error');
       return false;
     }
   }
+
+  // Future<bool> addNewItem() async {
+  //   // Validate form fields
+  //   if (!formKey.currentState!.validate()) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     // Create your objects here
+  //     // For example, you can create a new Item object with the provided data
+  //     Item newItem = Item(
+  //       itemName: itemName,
+  //       itemType: itemType,
+  //       quantity: quantity,
+  //       datePurchased: datePurchased,
+  //       dateExpiresOn: dateExpiresOn,
+  //       storedAt: storedAt,
+  //       description: description,
+  //       // Set the imageFile path if available
+  //       imagePath: imageFile != null ? imageFile!.path : null,
+  //     );
+
+  //     // Print the captured data to the console
+  //     print('New Item Data:');
+  //     print('Item Name: ${newItem.itemName}');
+  //     print('Item Type: ${newItem.itemType}');
+  //     print('Quantity: ${newItem.quantity}');
+  //     print('Date Purchased: ${newItem.datePurchased}');
+  //     print('Expires On: ${newItem.dateExpiresOn}');
+  //     print('Stored At: ${newItem.storedAt}');
+  //     print('Description: ${newItem.description}');
+  //     print('Image Path: ${newItem.imagePath}');
+
+  //     // Perform any necessary operations, such as saving to a database or API call
+
+  //     // Return true to indicate that the item was successfully created
+  //     return true;
+  //   } catch (error) {
+  //     // Handle any errors that occur during the creation process
+  //     print('Error creating item: $error');
+  //     return false;
+  //   }
+  // }
 }
