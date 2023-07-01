@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:intl/intl.dart';
 
@@ -20,33 +21,51 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isExpiredText =
         getRemainingDays(item.dateExpiresOn!).contains("Expired");
+    print("[DEBUG] list tile rebuilding");
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 10, 16),
+      padding: const EdgeInsetsDirectional.fromSTEB(22, 0, 12, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
-          CircleAvatar(
-            radius: 35.0,
-            backgroundColor: appbar,
-            //display pickedImage if not null, else display asset image
-            backgroundImage: Image.asset(item.imagePath!).image,
-            // Display asset image if pickedImage is null
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.grey,
+                width: 2.0,
+              ),
+            ),
+            child: CircleAvatar(
+              radius: 35.0,
+              backgroundColor: Colors.white,
+              backgroundImage: Image.asset(item.imagePath!).image,
+            ),
+          ),
+          const SizedBox(
+            width: 16,
           ),
           Flexible(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 8, 0),
+            child: Container(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+              decoration: const BoxDecoration(
+                border: BorderDirectional(
+                    bottom: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                )),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     item.itemName!,
-                    overflow: TextOverflow.visible,
+                    overflow: TextOverflow.ellipsis,
                     // softWrap: false,
                     maxLines: 3,
                     style: const TextStyle(
                       fontFamily: 'Outfit',
-                      height: 0.95,
+                      height: 1.2,
                       wordSpacing: 1.5,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -61,10 +80,10 @@ class CustomListTile extends StatelessWidget {
                     children: [
                       isExpiredText
                           ? Text(
-                              "Expired",
+                              "Expired!",
                               style: TextStyle(
                                 fontFamily: 'Outfit',
-                                fontSize: 14,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red.shade800,
                               ),
@@ -100,17 +119,23 @@ class CustomListTile extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   // Text("Expires in ${getRemainingDays(item.dateExpiresOn!)}"),
                 ],
               ),
             ),
           ),
-          IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.more_vert_rounded,
-                color: Theme.of(context).primaryColor,
-              ))
+          const SizedBox(
+            width: 16,
+          )
+          // IconButton(
+          //     onPressed: () {},
+          //     icon: Icon(
+          //       Icons.more_vert_rounded,
+          //       color: Theme.of(context).primaryColor,
+          //     ))
         ],
       ),
     );
