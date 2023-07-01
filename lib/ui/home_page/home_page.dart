@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:food_eye_fyp/components/list_tile.dart';
+import 'package:food_eye_fyp/ui/home_page/components/list_tile.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -106,24 +106,25 @@ class HomePage extends StatelessWidget {
                         ),
                         Text.rich(
                           TextSpan(
-                              text: "Enjoy by   ",
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 15,
-                                color: Colors.grey,
+                            text: "Enjoy by   ",
+                            style: const TextStyle(
+                              fontFamily: 'Outfit',
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: DateFormat.yMd()
+                                    .format(state.nearestExpDate),
+                                style: const TextStyle(
+                                  fontFamily: 'Outfit',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 29, 214, 106),
+                                ),
                               ),
-                              children: [
-                                TextSpan(
-                                  text: DateFormat.yMd()
-                                      .format(state.nearestExpDate),
-                                  style: const TextStyle(
-                                    fontFamily: 'Outfit',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 29, 214, 106),
-                                  ),
-                                )
-                              ]),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -133,8 +134,9 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsetsDirectional.fromSTEB(28, 0, 20, 10),
+            padding: const EdgeInsetsDirectional.fromSTEB(22, 0, 10, 10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text(
                   "All Items",
@@ -160,7 +162,7 @@ class HomePage extends StatelessWidget {
                     radius: 12.0,
                     backgroundColor: Colors.transparent,
                     child: Text(
-                      state.itemList.length.toString(),
+                      state.feItemList.length.toString(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontFamily: 'Outfit',
@@ -173,6 +175,17 @@ class HomePage extends StatelessWidget {
                 ),
                 const Spacer(),
                 TextButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(
+                          width: 2,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     state.showSortingOptions(context);
                   },
@@ -180,7 +193,7 @@ class HomePage extends StatelessWidget {
                     "Sort by: ${state.sortByOption}",
                     style: const TextStyle(
                       fontFamily: 'Outfit',
-                      fontSize: 16,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: primaryBG,
                     ),
@@ -207,42 +220,46 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: context.watch<HomePageState>().itemList.length,
-              itemBuilder: (context, index) {
-                final sortedItems = state.sortItems(state.itemList,
-                    state.isDescending.value, state.sortByOption);
-                final item = sortedItems[index];
-                return ValueListenableBuilder<bool>(
-                  valueListenable: state.isDescending,
-                  builder: (context, isDescending, _) {
-                    return Slidable(
-                      endActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            backgroundColor:
-                                const Color.fromARGB(255, 13, 107, 161),
-                            icon: Icons.edit,
-                            label: "Edit",
-                            onPressed: (context) {},
-                          ),
-                          SlidableAction(
-                            backgroundColor: Colors.red.shade700,
-                            icon: Icons.delete_outline_rounded,
-                            label: "Delete",
-                            onPressed: (context) {},
-                          ),
-                        ],
-                      ),
-                      child: CustomListTile(
-                        item: item,
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            child: state.feItemList.isEmpty
+                ? const Text("No data")
+                : ListView.builder(
+                    itemCount: context.watch<HomePageState>().feItemList.length,
+                    itemBuilder: (context, index) {
+                      final sortedItems = state.sortItems(state.feItemList,
+                          state.isDescending.value, state.sortByOption);
+                      final item = sortedItems[index];
+                      return ValueListenableBuilder<bool>(
+                        valueListenable: state.isDescending,
+                        builder: (context, isDescending, _) {
+                          return Slidable(
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 13, 107, 161),
+                                  icon: Icons.edit,
+                                  label: "Edit",
+                                  onPressed: (context) {},
+                                ),
+                                SlidableAction(
+                                  backgroundColor: Colors.red.shade700,
+                                  icon: Icons.delete_outline_rounded,
+                                  label: "Delete",
+                                  onPressed: (context) {
+                                    state.deleteItem(item.itemID);
+                                  },
+                                ),
+                              ],
+                            ),
+                            child: CustomListTile(
+                              item: item,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
           ),
           const SizedBox(
             height: 16,

@@ -1,15 +1,14 @@
-import 'dart:collection';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/data/model/item.dart';
+import 'package:food_eye_fyp/service/item_service.dart';
 import 'package:food_eye_fyp/ui/home_page/components/show_menu_ui.dart';
 import 'package:http/http.dart';
 
-import '../../utils/constants.dart';
+import '../../data/model/item_response.dart';
 
 class HomePageState extends ChangeNotifier {
   final BuildContext context;
+  final client = Client();
+  final _itemService = ItemService();
   final ValueNotifier<bool> isDescending = ValueNotifier<bool>(false);
   // Define the sorting options
   final sortingOptions = [
@@ -21,82 +20,22 @@ class HomePageState extends ChangeNotifier {
   String sortByOption = "Name";
   DateTime nearestExpDate = DateTime.now();
   int expItemCount = 0;
-  String itemName = "AAa";
+  String itemName = "";
   int quantity = 0;
+  List<ItemResponseObject> feItemList = [];
   DateTime datePurchased = DateTime(2022, 12, 10);
   DateTime dateExpiresOn = DateTime(2022, 12, 15);
 
-  final List<Item> itemList = [
-    Item(
-      itemName:
-          'Goodfellow and Co No. 01 Blue Sage Tonka Texturizing Fiber, 4 Oz.',
-      itemType: 'Fruit',
-      quantity: 5,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().subtract(Duration(days: 2)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Fresh and juicy apple',
-    ),
-    Item(
-      itemName: 'Banana',
-      itemType: 'Fruit',
-      quantity: 3,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().add(Duration(days: 7)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Sweet and nutritious banana',
-    ),
-    Item(
-      itemName: 'Orange',
-      itemType: 'Fruit',
-      quantity: 2,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().add(Duration(days: 10)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Tangy and refreshing orange',
-    ),
-    Item(
-      itemName: 'Orange',
-      itemType: 'Fruit',
-      quantity: 2,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().add(Duration(days: 10)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Tangy and refreshing orange',
-    ),
-    Item(
-      itemName: 'Orange',
-      itemType: 'Fruit',
-      quantity: 2,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().add(Duration(days: 10)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Tangy and refreshing orange',
-    ),
-    Item(
-      itemName: 'Orange',
-      itemType: 'Fruit',
-      quantity: 2,
-      datePurchased: DateTime.now(),
-      dateExpiresOn: DateTime.now().add(Duration(days: 10)),
-      imagePath: 'assets/images/fruit.png',
-      storedAt: "Pantry",
-      description: 'Tangy and refreshing orange',
-    ),
-  ];
-
-  HomePageState(this.context);
+  HomePageState(this.context) {
+    loadItems();
+  }
   void toggleSortingOrder() {
     isDescending.value = !isDescending.value;
     notifyListeners();
   }
 
-  List<Item> sortItems(List<Item> items, bool isDescending, String sortBy) {
+  List<ItemResponseObject> sortItems(
+      List<ItemResponseObject> items, bool isDescending, String sortBy) {
     switch (sortBy) {
       case 'Name':
         return items
@@ -131,11 +70,24 @@ class HomePageState extends ChangeNotifier {
     if (selectedOption != null) {
       sortByOption = selectedOption;
       sortItems(
-        itemList,
+        feItemList,
         isDescending.value,
         selectedOption,
       );
       notifyListeners();
     }
+  }
+
+  Future<void> loadItems() async {
+    await _itemService.getAllItems().then((items) {
+      feItemList = items;
+      notifyListeners();
+    });
+  }
+
+  Future<void> deleteItem(int itemID) async {
+    await _itemService.deleteItem(itemID);
+    await loadItems();
+    // notifyListeners();
   }
 }
