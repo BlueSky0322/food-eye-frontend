@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_eye_fyp/components/list_tile.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 // import '../../data/model/item.dart';
-import '../../data/model/item.dart';
 import '../../utils/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -34,6 +34,11 @@ class HomePage extends StatelessWidget {
             IconButton(
               onPressed: () {
                 // Perform avatar icon action
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/splash',
+                  (route) => false,
+                );
               },
               icon: Container(
                 width: 65,
@@ -109,7 +114,7 @@ class HomePage extends StatelessWidget {
                               ),
                               children: [
                                 TextSpan(
-                                  text: DateFormat('dd/MM/yyyy')
+                                  text: DateFormat.yMd()
                                       .format(state.nearestExpDate),
                                   style: const TextStyle(
                                     fontFamily: 'Outfit',
@@ -127,26 +132,120 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Text("data"),
+          Container(
+            padding: const EdgeInsetsDirectional.fromSTEB(28, 0, 20, 10),
+            child: Row(
+              children: [
+                const Text(
+                  "All Items",
+                  style: TextStyle(
+                    fontFamily: 'Outfit',
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: primaryBG,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: primaryBG,
+                      width: 2.0,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 12.0,
+                    backgroundColor: Colors.transparent,
+                    child: Text(
+                      state.itemList.length.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontFamily: 'Outfit',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: primaryBG,
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () {
+                    state.showSortingOptions(context);
+                  },
+                  child: Text(
+                    "Sort by: ${state.sortByOption}",
+                    style: const TextStyle(
+                      fontFamily: 'Outfit',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: primaryBG,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    state.toggleSortingOrder();
+                  },
+                  icon: Transform.rotate(
+                    angle: 90 *
+                        3.1415927 /
+                        180, // Rotate by 90 degrees (in radians)
+                    child: Icon(
+                      !state.isDescending.value
+                          ? Icons.switch_left_rounded
+                          : Icons.switch_right_rounded,
+                      size: 30,
+                    ),
+                  ),
+                  color: primaryBG,
+                )
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
-              itemCount: state.itemList.length,
+              itemCount: context.watch<HomePageState>().itemList.length,
               itemBuilder: (context, index) {
-                final item = state.itemList[index];
-                return CustomListTile(
-                  item: item,
+                final sortedItems = state.sortItems(state.itemList,
+                    state.isDescending.value, state.sortByOption);
+                final item = sortedItems[index];
+                return ValueListenableBuilder<bool>(
+                  valueListenable: state.isDescending,
+                  builder: (context, isDescending, _) {
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        motion: const ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            backgroundColor:
+                                const Color.fromARGB(255, 13, 107, 161),
+                            icon: Icons.edit,
+                            label: "Edit",
+                            onPressed: (context) {},
+                          ),
+                          SlidableAction(
+                            backgroundColor: Colors.red.shade700,
+                            icon: Icons.delete_outline_rounded,
+                            label: "Delete",
+                            onPressed: (context) {},
+                          ),
+                        ],
+                      ),
+                      child: CustomListTile(
+                        item: item,
+                      ),
+                    );
+                  },
                 );
-                // return ListTile(
-                //   leading: item.imagePath != null
-                //       ? Image.asset(item.imagePath!)
-                //       : const SizedBox.shrink(),
-                //   title: Text(item.itemName ?? ''),
-                //   subtitle: Text('Quantity: ${item.quantity}'),
-                //   trailing: Text(
-                //       'Expires on: ${DateFormat('yyyy-MM-dd').format(item.dateExpiresOn!)}'),
-                // );
               },
             ),
+          ),
+          const SizedBox(
+            height: 16,
           )
         ],
       ),
