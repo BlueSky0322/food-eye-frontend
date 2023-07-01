@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/utils/constants.dart';
 
 class ItemImage extends StatelessWidget {
   ImageProvider pickedImage;
@@ -18,12 +19,21 @@ class ItemImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Stack(children: <Widget>[
-        CircleAvatar(
-          radius: 80.0,
-          backgroundColor: Colors.transparent,
-          //display pickedImage if not null, else display asset image
-          backgroundImage: pickedImage,
-          // Display asset image if pickedImage is null
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: appbar,
+              width: 6.0,
+            ),
+          ),
+          child: CircleAvatar(
+            radius: 80.0,
+            backgroundColor: Colors.transparent,
+            //display pickedImage if not null, else display asset image
+            backgroundImage: pickedImage,
+            // Display asset image if pickedImage is null
+          ),
         ),
         Positioned(
           bottom: 20.0,

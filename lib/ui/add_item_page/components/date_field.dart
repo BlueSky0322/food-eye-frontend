@@ -14,7 +14,8 @@ class DateFormField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
 
-  DateFormField({
+  const DateFormField({
+    super.key,
     required this.onChanged,
     required this.onPressed,
     required this.controller,

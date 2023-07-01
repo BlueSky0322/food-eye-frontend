@@ -10,6 +10,7 @@ class HomePageState extends ChangeNotifier {
   final client = Client();
   final _itemService = ItemService();
   final ValueNotifier<bool> isDescending = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
   // Define the sorting options
   final sortingOptions = [
     'Name',
@@ -31,6 +32,11 @@ class HomePageState extends ChangeNotifier {
   }
   void toggleSortingOrder() {
     isDescending.value = !isDescending.value;
+    notifyListeners();
+  }
+
+  void toggleLoading() {
+    isLoading.value = !isLoading.value;
     notifyListeners();
   }
 

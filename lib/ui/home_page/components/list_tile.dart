@@ -48,8 +48,8 @@ class CustomListTile extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.teal,
-                width: 2.0,
+                color: primaryBG,
+                width: 2.5,
               ),
             ),
             child: CircleAvatar(
@@ -161,7 +161,8 @@ class CustomListTile extends StatelessWidget {
                             ),
                             children: [
                               TextSpan(
-                                text: getExpiryStatus(item.dateExpiresOn!),
+                                text: DateFormat.yMMM()
+                                    .format(item.dateExpiresOn!),
                                 style: TextStyle(
                                   fontFamily: 'Outfit',
                                   fontSize: 14,
@@ -172,16 +173,30 @@ class CustomListTile extends StatelessWidget {
                             ],
                           ),
                         ),
-                      Text(
-                        "Quantity: ${item.quantity}",
-                        style: TextStyle(
-                          fontFamily: 'Outfit',
-                          fontSize: 14,
-                          color: Colors.grey.shade600,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Quantity: ${item.quantity}",
+                            style: TextStyle(
+                              fontFamily: 'Outfit',
+                              fontSize: 12,
+                              color: Colors.grey.shade900,
+                            ),
+                          ),
+                          Text(
+                            "Stored in ${item.storedAt}",
+                            style: TextStyle(
+                              fontFamily: 'Outfit',
+                              fontSize: 12,
+                              color: Colors.grey.shade900,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+
                   const SizedBox(
                     height: 16,
                   ),

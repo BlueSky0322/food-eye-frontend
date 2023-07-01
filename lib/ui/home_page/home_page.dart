@@ -16,8 +16,14 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: pageBG,
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
         backgroundColor: appbar,
-        elevation: 1,
+        elevation: 6,
         toolbarHeight: 70,
         title: Row(
           children: [
@@ -27,7 +33,7 @@ class HomePage extends StatelessWidget {
                 fontFamily: 'Outfit',
                 fontSize: 28,
                 fontWeight: FontWeight.w500,
-                color: primaryBG,
+                color: appbarText,
               ),
             ),
             const Spacer(),
@@ -221,7 +227,19 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child: state.feItemList.isEmpty
-                ? const Text("No data")
+                ? Container(
+                    color: Colors.black.withOpacity(0.1),
+                    child: Center(
+                      child: Text(
+                        "Your list is currently empty! ",
+                        style: TextStyle(
+                          fontFamily: 'Outfit',
+                          fontSize: 15,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                  )
                 : ListView.builder(
                     itemCount: context.watch<HomePageState>().feItemList.length,
                     itemBuilder: (context, index) {
@@ -236,8 +254,7 @@ class HomePage extends StatelessWidget {
                               motion: const ScrollMotion(),
                               children: [
                                 SlidableAction(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 13, 107, 161),
+                                  backgroundColor: appbar,
                                   icon: Icons.edit,
                                   label: "Edit",
                                   onPressed: (context) {},

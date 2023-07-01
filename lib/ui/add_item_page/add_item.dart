@@ -30,16 +30,32 @@ class AddItemPage extends StatelessWidget {
       backgroundColor: pageBG,
       appBar: AppBar(
         backgroundColor: appbar,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
         elevation: 0,
         toolbarHeight: 70,
-        title: const Text(
-          "Add new item",
-          style: TextStyle(
-            fontFamily: 'Outfit',
-            fontSize: 28,
-            fontWeight: FontWeight.w500,
-            color: primaryBG,
-          ),
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.add,
+              color: appbarText,
+              size: 40,
+            ),
+            Text(
+              "Add new item",
+              style: TextStyle(
+                fontFamily: 'Outfit',
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+                color: appbarText,
+              ),
+            ),
+          ],
         ),
       ),
       body: SafeArea(
