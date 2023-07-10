@@ -42,7 +42,6 @@ String parseExpiryDate(String text) {
   }
 
   if (expiryDate != null) {
-    // return DateFormat('yyyy-MM-dd').format(expiryDate);
     return expiryDate.toString();
   } else {
     return text;

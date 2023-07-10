@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 
 class InputSelectionDailog extends StatelessWidget {
-  //final String imageAsset;
   final VoidCallback? trOnPressed;
   final VoidCallback? dpOnPressed;
 
@@ -10,7 +9,6 @@ class InputSelectionDailog extends StatelessWidget {
     super.key,
     this.dpOnPressed,
     this.trOnPressed,
-    //required this.imageAsse
   });
 
   @override
@@ -54,9 +52,6 @@ class InputSelectionDailog extends StatelessWidget {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // SizedBox(
-                      //   width: 6,
-                      // ),
                       Icon(
                         Icons.text_fields_rounded,
                         color: primaryBG,
@@ -86,9 +81,6 @@ class InputSelectionDailog extends StatelessWidget {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // SizedBox(
-                      //   width: 6,
-                      // ),
                       Icon(
                         Icons.calendar_month,
                         color: primaryBG,

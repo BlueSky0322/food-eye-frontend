@@ -23,8 +23,7 @@ class CustomListTile extends StatelessWidget {
     } else if (difference <= 14) {
       return '$difference day(s)';
     } else {
-      return DateFormat.yMd()
-          .format(expiryDate); // Adjust the date format as desired
+      return DateFormat.yMd().format(expiryDate);
     }
   }
 
@@ -88,7 +87,6 @@ class CustomListTile extends StatelessWidget {
                   Text(
                     item.itemName!,
                     overflow: TextOverflow.ellipsis,
-                    // softWrap: false,
                     maxLines: 3,
                     style: const TextStyle(
                       fontFamily: 'Outfit',
@@ -206,11 +204,9 @@ class CustomListTile extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(
                     height: 16,
                   ),
-                  // Text("Expires in ${getRemainingDays(item.dateExpiresOn!)}"),
                 ],
               ),
             ),
@@ -218,12 +214,6 @@ class CustomListTile extends StatelessWidget {
           const SizedBox(
             width: 16,
           )
-          // IconButton(
-          //     onPressed: () {},
-          //     icon: Icon(
-          //       Icons.more_vert_rounded,
-          //       color: Theme.of(context).primaryColor,
-          //     ))
         ],
       ),
     );

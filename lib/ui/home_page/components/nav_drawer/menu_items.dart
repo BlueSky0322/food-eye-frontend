@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/service/background_service.dart';
+import 'package:food_eye_fyp/service/shared_preferences_service.dart';
 import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/confirm_logout.dart';
-// import 'package:food_eye_fyp/ui/settings_page/set.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
-import 'package:provider/provider.dart';
 
 Widget buildSettings(BuildContext context) {
-  // final bgServicestate = Provider.of<BackgroundService>(context);
   return Container(
     padding: const EdgeInsets.all(18),
     child: Wrap(
@@ -47,8 +45,6 @@ Widget buildSettings(BuildContext context) {
             showDialog(
               context: context,
               builder: (context) {
-                // int newDaysBeforeToNotify =
-                //     BackgroundService.daysBeforeToNotify;
                 int newDaysBeforeToNotify = 0;
                 return AlertDialog(
                   title: const Text("Notification Settings"),
@@ -64,21 +60,10 @@ Widget buildSettings(BuildContext context) {
                   actions: [
                     TextButton(
                       onPressed: () async {
-                        // BackgroundService.daysBeforeToNotify =
-                        //     newDaysBeforeToNotify;
-                        // print(newDaysBeforeToNotify.toString() +
-                        //     "/" +
-                        //     BackgroundService.daysBeforeToNotify.toString());
-                        await BackgroundService.saveDaysBeforeToNotifyToPrefs(
+                        await SharedPrefsService.saveDaysBeforeToNotifyToPrefs(
                             newDaysBeforeToNotify);
                         await BackgroundService
                             .restartDateCheckerBackgroundService();
-                        // await BackgroundService.updateDaysBeforeToNotify(
-                        //     newDaysBeforeToNotify);
-                        // BackgroundService
-                        //     .unregisterDateCheckerBackgroundService();
-                        // BackgroundService
-                        //     .registerDateCheckerBackgroundService();
                         Navigator.pop(context);
                       },
                       child: const Text("Save"),

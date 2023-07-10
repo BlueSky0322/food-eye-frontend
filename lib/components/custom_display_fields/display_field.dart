@@ -15,7 +15,6 @@ class CustomDisplayField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0), // Set the border radius here
         border: Border.all(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/constants.dart';
 
 class CustomInputDecoration {
@@ -19,7 +18,7 @@ class CustomInputDecoration {
       ),
       prefixIcon: Icon(
         prefixIcon,
-        color: Color.fromARGB(255, 96, 180, 206),
+        color: const Color.fromARGB(255, 96, 180, 206),
       ),
       suffixIcon: suffixIcon,
       hintText: hintText,

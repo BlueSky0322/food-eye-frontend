@@ -33,24 +33,6 @@ class ItemNameFormField extends StatelessWidget {
           color: primaryBG,
           onPressed: onPressed,
         ),
-        // suffixIcon: Padding(
-        //   padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-        //   child: CircleAvatar(
-        //     radius: 25.0,
-        //     backgroundColor: Theme.of(context).primaryColor,
-        //     child: InkWell(
-        //       onTap: onTap,
-        //       // child:
-        //       child: const Center(
-        //         child: Icon(
-        //           Icons.qr_code_scanner_rounded,
-        //           color: Colors.white,
-        //           size: 35.0,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ),
       style: TextStyle(
           color: Colors.teal.shade800,
