@@ -3,10 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-
-import 'background_service.dart';
 
 class NotificationService {
   BuildContext? _context;
@@ -45,7 +41,6 @@ class NotificationService {
           '/home',
           (route) => false,
         );
-        //print("Working");
       },
     );
 
@@ -53,10 +48,6 @@ class NotificationService {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestPermission();
-
-    // if (!BackgroundService.isRegistered) {
-    //   BackgroundService.registerDateCheckerBackgroundService();
-    // }
   }
 
   notificationDetails() {
@@ -67,7 +58,6 @@ class NotificationService {
       priority: Priority.max,
       importance: Importance.max,
     ));
-    //iOS: DarwinNotificationDetails());
   }
 
   Future showNotification(String title, String body) async {
@@ -76,7 +66,6 @@ class NotificationService {
       title,
       body,
       await notificationDetails(),
-      // payload: payload,
     );
   }
 }

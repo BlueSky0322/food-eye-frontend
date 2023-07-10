@@ -74,21 +74,6 @@ Widget buildSettings(BuildContext context) {
             );
           },
         ),
-
-        // ListTile(
-        //   iconColor: primaryBG,
-        //   leading: const Icon(Icons.notifications),
-        //   title: const Text(
-        //     "Notification Settings",
-        //     style: TextStyle(
-        //       fontFamily: 'Outfit',
-        //       color: primaryBG,
-        //     ),
-        //   ),
-        //   onTap: () {
-
-        //   },
-        // ),
         ListTile(
           iconColor: primaryBG,
           leading: const Icon(Icons.logout),

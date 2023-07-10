@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/service/item_service.dart';
-import 'package:food_eye_fyp/service/notification_service.dart';
 import 'package:food_eye_fyp/ui/home_page/components/sorting_options.dart';
-import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
-// import 'package:workmanager/workmanager.dart';
 
 import '../../data/model/item_response.dart';
-import '../../service/background_service.dart';
 
 class HomePageState extends ChangeNotifier {
   final BuildContext context;

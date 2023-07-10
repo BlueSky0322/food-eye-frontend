@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -18,7 +17,6 @@ import '../../modules/image_recognition/image_input.dart';
 import '../../modules/image_recognition/text_recognition.dart';
 import '../../service/item_service.dart';
 import '../../utils/constants.dart';
-import '../../utils/http_utils.dart';
 
 class EditItemState extends ChangeNotifier {
   BuildContext context;
@@ -36,8 +34,6 @@ class EditItemState extends ChangeNotifier {
   final client = Client();
   final _itemService = ItemService();
 
-  // static const _100_YEARS = Duration(days: 365 * 100);
-
   XFile? _imageFile;
   String? _scannedName;
   String? itemName;
@@ -49,7 +45,6 @@ class EditItemState extends ChangeNotifier {
   String? description;
   XFile? get imageFile => _imageFile;
 
-  //List<Item> _itemList = [];
   EditItemState(
     this.context,
     this.itemToEditID,

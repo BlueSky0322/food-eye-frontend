@@ -5,7 +5,6 @@ import 'package:food_eye_fyp/components/error_alert_dialog.dart';
 import 'package:food_eye_fyp/components/input_selection_dialog.dart';
 import 'package:food_eye_fyp/ui/add_item_page/add_item_state.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/custom_input_fields/date_field.dart';
@@ -185,15 +184,6 @@ class AddItemPage extends StatelessWidget {
                                     });
                                   });
                                 } else if (selectedOption == 1) {
-                                  // final selectedDate =
-                                  //     await state.selectDate(context, 1);
-                                  // if (selectedDate != null) {
-                                  //   // Update the value or perform any necessary actions
-                                  //   state.dateExpiresOn = selectedDate;
-                                  //   state.expiryDateController.text =
-                                  //       DateFormat('yyyy-MM-dd')
-                                  //           .format(selectedDate);
-                                  // }
                                   await state.assignExpiryDate();
                                 }
                               },

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
@@ -9,7 +8,6 @@ import 'package:food_eye_fyp/service/item_service.dart';
 import 'package:food_eye_fyp/service/notification_service.dart';
 import 'package:food_eye_fyp/service/shared_preferences_service.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/http_utils.dart';
 
@@ -100,15 +98,4 @@ class BackgroundService {
     await Future.delayed(const Duration(seconds: 2));
     registerDateCheckerBackgroundService();
   }
-
-  static Future<void> loadDaysBeforeToNotifyFromPrefs() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.getInt('daysBeforeToNotify') ?? 7;
-  }
-
-  // static Future<void> saveDaysBeforeToNotifyToPrefs(int days) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   log("[DEBUG] shared preferences stored: $days");
-  //   await prefs.setInt('daysBeforeToNotify', days);
-  // }
 }

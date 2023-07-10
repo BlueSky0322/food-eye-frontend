@@ -1,10 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/service/notification_service.dart';
 import 'package:food_eye_fyp/ui/edit_item_page/edit_page_state.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/error_alert_dialog.dart';
@@ -19,7 +17,6 @@ import '../../components/custom_input_fields/item_quantity_field.dart';
 import '../../components/custom_input_fields/item_storage_field.dart';
 import '../../components/custom_input_fields/item_type_field.dart';
 import '../../components/success_alert_dialog.dart';
-import '../home_page/home_page_state.dart';
 
 class EditItem extends StatelessWidget {
   const EditItem({super.key});

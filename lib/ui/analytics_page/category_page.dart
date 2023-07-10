@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_eye_fyp/components/list_tile.dart';
@@ -271,31 +269,8 @@ class AnalyticsPage extends StatelessWidget {
                         child: CustomListTile(item: element),
                       );
                     },
-                    // itemBuilder: (context, element) => CustomListTile(item: element),
                   ),
       ),
     );
-    // return Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       TextButton(
-    //         onPressed: () {
-    //           // state.fetchWeatherForecast();
-    //           // NotificationService()
-    //           //     .showNotification(title: "Test", body: "It works");
-    //           // imagePickerModal(context, onPressedPhoto: () {
-    //           //   log("camera");
-    //           //   state.imageInputSelection(ImageSource.camera);
-    //           // }, onPressedGallery: () {
-    //           //   log("gallery");
-    //           //   state.imageInputSelection(ImageSource.gallery);
-    //           // });
-    //         },
-    //         child: Text("Button"),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
