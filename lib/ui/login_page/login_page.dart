@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/components/input_decoration.dart';
+import 'package:food_eye_fyp/components/custom_input_decoration/input_decoration.dart';
 import 'package:provider/provider.dart';
 import '../../utils/constants.dart';
 import '../register_page/register_page.dart';

@@ -6,7 +6,7 @@ import 'package:food_eye_fyp/ui/register_page/register_page_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/input_decoration.dart';
+import '../../components/custom_input_decoration/input_decoration.dart';
 import '../../utils/constants.dart';
 
 class RegisterPage extends StatelessWidget {
