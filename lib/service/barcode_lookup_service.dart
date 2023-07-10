@@ -9,7 +9,7 @@ class BarcodeLookupService {
 
   Future<String> lookupProductName({required String code}) async {
     if (code.isEmpty) {
-      return "";
+      return "Product not found";
     }
 
     final request =
