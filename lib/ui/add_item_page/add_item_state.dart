@@ -1,27 +1,37 @@
-import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:food_eye_fyp/service/barcode_lookup.dart';
+import 'package:food_eye_fyp/service/barcode_lookup_service.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../../data/model/item.dart';
-import '../../utils/http_utils.dart';
+import '../../modules/barcode_scanner/barcode_scanner.dart';
+import '../../modules/image_recognition/expiry_date_parser.dart';
+import '../../modules/image_recognition/image_input.dart';
+import '../../modules/image_recognition/text_recognition.dart';
+import '../../service/item_service.dart';
+import '../../utils/constants.dart';
 
 class AddItemState extends ChangeNotifier {
   BuildContext context;
   TextEditingController itemNameController = TextEditingController();
+  TextEditingController quantityController = TextEditingController(text: "1");
+  TextEditingController purchasedDateController = TextEditingController();
+  TextEditingController expiryDateController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<State> dialogKey = GlobalKey<State>();
   final _barcodeLookupService = BarcodeLookupService();
   final client = Client();
-  static const _100_YEARS = Duration(days: 365 * 100);
+  final _itemService = ItemService();
+  // static const _100_YEARS = Duration(days: 365 * 100);
 
   XFile? _imageFile;
-  String? _scannedName;
+  String _scannedName = "";
   String? itemName;
   String? itemType;
   int quantity = 1;
@@ -33,6 +43,32 @@ class AddItemState extends ChangeNotifier {
 
   //List<Item> _itemList = [];
   AddItemState(this.context);
+
+  Future<bool> addNewItem() async {
+    // Validate form fields
+    if (!formKey.currentState!.validate()) {
+      return false;
+    }
+
+    try {
+      Item newItem = Item(
+        itemName: itemName,
+        itemType: itemType,
+        quantity: quantity,
+        datePurchased: datePurchased,
+        dateExpiresOn: dateExpiresOn,
+        storedAt: storedAt,
+        description: description,
+        // Set the imageFile path if available
+        imagePath: imageFile != null ? imageFile!.path : defaultImage,
+      );
+
+      return await _itemService.addItem(newItem);
+    } catch (error) {
+      log('Error creating item: $error');
+      return false;
+    }
+  }
 
   String? validateQuantity(String? value) {
     if (value == null || value.isEmpty) {
@@ -67,7 +103,7 @@ class AddItemState extends ChangeNotifier {
       initialDate: DateTime.now(),
       firstDate: selectRange == 0 ? DateTime(1900) : DateTime.now(),
       lastDate:
-          selectRange == 0 ? DateTime.now() : DateTime.now().add(_100_YEARS),
+          selectRange == 0 ? DateTime.now() : DateTime.now().add(hundredYears),
     );
     return selectedDate;
   }
@@ -80,7 +116,7 @@ class AddItemState extends ChangeNotifier {
       ).image;
     } else {
       return const AssetImage(
-        'assets/images/image-placeholder.png',
+        defaultImage,
       );
     }
   }
@@ -93,127 +129,51 @@ class AddItemState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> scanBarcodeNormal() async {
-    try {
-      _scannedName = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
-        'Cancel',
-        true,
-        ScanMode.BARCODE,
-      ).then((value) {
-        // ignore: unrelated_type_equality_checks
-        if (value == -1) {
-          return null;
-        }
-        return null;
-      });
-
-      await _barcodeLookupService
-          .lookupProductName(code: _scannedName!)
-          .then((productName) {
-        itemName = productName;
+  void processBarcode() async {
+    final scannedName = await BarcodeScannerHelper.scanBarcodeNormal();
+    if (scannedName != "Error") {
+      itemName =
+          await _barcodeLookupService.lookupProductName(code: _scannedName);
+      if (itemName != "Product not found") {
         itemNameController.text = itemName!;
-        print(itemName);
         notifyListeners();
-      });
-    } on PlatformException {
-      _scannedName = "Error";
-    }
-  }
-
-  Future<bool> addNewItem() async {
-    // Validate form fields
-    if (!formKey.currentState!.validate()) {
-      return false;
-    }
-
-    try {
-      // Create your objects here
-      // For example, you can create a new Item object with the provided data
-      Item newItem = Item(
-        itemName: itemName,
-        itemType: itemType,
-        quantity: quantity,
-        datePurchased: datePurchased,
-        dateExpiresOn: dateExpiresOn,
-        storedAt: storedAt,
-        description: description,
-        // Set the imageFile path if available
-        imagePath: imageFile != null
-            ? imageFile!.path
-            : 'assets/images/image-placeholder.png',
-      );
-
-      // Convert the Item object to JSON
-      final jsonData = json.encode(newItem.toJson());
-
-//      Make the POST request
-      // final response = await client.post(
-      //   Uri.parse("$emulatorURL/api/FoodEyeItems/AddFEItem"),
-      //   headers: {"Content-Type": "application/json"},
-      //   body: jsonData,
-      // );
-
-      // Make the POST request
-      final response = await client.post(
-        Uri.parse("$usbDebugURL/api/FoodEyeItems/AddFEItem"),
-        headers: {"Content-Type": "application/json"},
-        body: jsonData,
-      );
-
-      if (response.statusCode == 201) {
-        print('Item added successfully!');
-        return true;
-      } else {
-        print('API call failed with status code: ${response.statusCode}');
-        return false;
       }
-    } catch (error) {
-      print('Error creating item: $error');
-      return false;
+    } else {
+      itemNameController.clear();
     }
   }
 
-  // Future<bool> addNewItem() async {
-  //   // Validate form fields
-  //   if (!formKey.currentState!.validate()) {
-  //     return false;
-  //   }
+  void imageInputSelection(ImageSource source) {
+    ImageInput.imageInputSelection(context, source, processImage);
+  }
 
-  //   try {
-  //     // Create your objects here
-  //     // For example, you can create a new Item object with the provided data
-  //     Item newItem = Item(
-  //       itemName: itemName,
-  //       itemType: itemType,
-  //       quantity: quantity,
-  //       datePurchased: datePurchased,
-  //       dateExpiresOn: dateExpiresOn,
-  //       storedAt: storedAt,
-  //       description: description,
-  //       // Set the imageFile path if available
-  //       imagePath: imageFile != null ? imageFile!.path : null,
-  //     );
+  void processImage(String imagePath) async {
+    final InputImage inputImage = InputImage.fromFilePath(imagePath);
+    final recognizedText = await TextRecognitionHelper.processImage(inputImage);
 
-  //     // Print the captured data to the console
-  //     print('New Item Data:');
-  //     print('Item Name: ${newItem.itemName}');
-  //     print('Item Type: ${newItem.itemType}');
-  //     print('Quantity: ${newItem.quantity}');
-  //     print('Date Purchased: ${newItem.datePurchased}');
-  //     print('Expires On: ${newItem.dateExpiresOn}');
-  //     print('Stored At: ${newItem.storedAt}');
-  //     print('Description: ${newItem.description}');
-  //     print('Image Path: ${newItem.imagePath}');
+    dateExpiresOn = DateTime.parse(parseExpiryDate(recognizedText.text));
+    log(dateExpiresOn.toString());
+    expiryDateController.text = DateFormat('yyyy-MM-dd').format(dateExpiresOn!);
+  }
 
-  //     // Perform any necessary operations, such as saving to a database or API call
+  Future<void> assignExpiryDate() async {
+    final selectedDate = await selectDate(context, 1);
+    if (selectedDate != null) {
+      // Update the value or perform any necessary actions
+      dateExpiresOn = selectedDate;
+      log(dateExpiresOn.toString());
+      expiryDateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
+    }
+  }
 
-  //     // Return true to indicate that the item was successfully created
-  //     return true;
-  //   } catch (error) {
-  //     // Handle any errors that occur during the creation process
-  //     print('Error creating item: $error');
-  //     return false;
-  //   }
-  // }
+  Future<void> assignPurchaseDate() async {
+    final selectedDate = await selectDate(context, 0);
+    if (selectedDate != null) {
+      // Update the value or perform any necessary actions
+      datePurchased = selectedDate;
+      log(datePurchased.toString());
+      purchasedDateController.text =
+          DateFormat('yyyy-MM-dd').format(selectedDate);
+    }
+  }
 }
