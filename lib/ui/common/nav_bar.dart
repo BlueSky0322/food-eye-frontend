@@ -37,6 +37,7 @@ class NavBar extends StatelessWidget {
       onTap: (index) {
         state.selectedIndex = index;
       },
+      index: state.selectedIndex,
     );
     // return BottomNavigationBar(
     //   backgroundColor: appbar,

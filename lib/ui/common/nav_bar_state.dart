@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:food_eye_fyp/ui/add_item_page/add_item.dart';
 import 'package:food_eye_fyp/ui/add_item_page/add_item_state.dart';
-import 'package:food_eye_fyp/ui/analytics_page/analytics_page.dart';
-import 'package:food_eye_fyp/ui/analytics_page/analytics_page_state.dart';
+import 'package:food_eye_fyp/ui/analytics_page/category_page.dart';
+import 'package:food_eye_fyp/ui/analytics_page/category_page_state.dart';
 import 'package:provider/provider.dart';
 
 import '../home_page/home_page.dart';
@@ -38,5 +38,10 @@ class NavBarState extends ChangeNotifier {
   @override
   void notifyListeners() {
     super.notifyListeners();
+  }
+
+  void navigateToAddItemPage() {
+    // Set the selected index to the home page index (0)
+    selectedIndex = 1;
   }
 }
