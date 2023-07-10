@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/data/model/new_user.dart';
 
 import '../../data/model/auth_user.dart';
 
@@ -41,29 +44,20 @@ class LoginPageState extends ChangeNotifier {
     return null;
   }
 
-  bool logintest() {
-    if (email == 'a@a.a' && password == '123123') {
-      notifyListeners();
-      return true;
-    } else {
-      AuthUser user = AuthUser(email: email, password: password);
-      print(user.email + ":" + user.password);
-      return false;
-    }
-  }
-
   Future<bool?> login() async {
     // Create an instance of AuthUser
     AuthUser user = AuthUser(email: email, password: password);
-    print(user.email + ":" + user.password);
-    // Call your login API using a service or HTTP client
-    // Pass the user credentials and handle the response
-    // ...
+    log("${user.email}:${user.password}");
 
-    if (email == 'a@a.c' && password == '123123') {
+    // Check if the email and password exist in the list of users
+    bool isValidUser = NewUser.users
+        .any((u) => u.email == user.email && u.password == user.password);
+
+    if (isValidUser) {
       notifyListeners();
       return true;
     }
+
     return null;
   }
 }

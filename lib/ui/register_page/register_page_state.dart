@@ -1,19 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/data/model/new_user.dart';
 
 class RegisterPageState extends ChangeNotifier {
   final BuildContext context;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final ValueNotifier<bool> isPasswordVisible = ValueNotifier<bool>(false);
   String email = '';
   String password = '';
   String name = '';
   int age = 0;
   DateTime? dateOfBirth;
-  // DateTime? dateOfBirth =
-  //     DateTime(DateTime.now().day, DateTime.now().month, DateTime.now().year);
   String address = '';
+
+  List<NewUser> newUserList = [];
 
   RegisterPageState(this.context);
 
@@ -95,12 +96,14 @@ class RegisterPageState extends ChangeNotifier {
         age: age,
         address: address,
         dateOfBirth: dateOfBirth);
-    print(newUser.email);
-    print(newUser.password);
-    print(newUser.name);
-    print(newUser.age);
-    print(newUser.address);
-    print(newUser.dateOfBirth);
+
+    NewUser.users.add(newUser);
+    log(newUserList.toString());
+    log("${newUser.email}");
+    log("${newUser.password}");
+    log("${newUser.age}");
+    log("${newUser.address}");
+    log("${newUser.dateOfBirth}");
     notifyListeners();
     return true;
   }

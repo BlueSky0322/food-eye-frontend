@@ -7,7 +7,7 @@ import '../register_page/register_page_state.dart';
 import 'login_page_state.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -178,10 +178,10 @@ class LoginPage extends StatelessWidget {
                           width: 200,
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (loginPageState.formKey.currentState!
                                   .validate()) {
-                                loginPageState.logintest() != true
+                                await loginPageState.login() != true
                                     ? showDialog(
                                         context: context,
                                         builder: (context) {
