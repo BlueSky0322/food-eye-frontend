@@ -1,24 +1,24 @@
 class ItemResponseObject {
-  final int itemID;
-  final String? itemName;
-  final String? itemType;
-  final int quantity;
-  final DateTime? datePurchased;
-  final DateTime? dateExpiresOn;
+  int? itemID;
+  String? itemName;
+  String? itemType;
+  int? quantity;
+  DateTime? datePurchased;
+  DateTime? dateExpiresOn;
   String? imagePath;
-  final String? storedAt;
-  final String? description;
+  String? storedAt;
+  String? description;
 
   ItemResponseObject({
-    required this.itemID,
-    required this.itemName,
-    required this.itemType,
-    required this.quantity,
-    required this.datePurchased,
-    required this.dateExpiresOn,
+    this.itemID,
+    this.itemName,
+    this.itemType,
+    this.quantity,
+    this.datePurchased,
+    this.dateExpiresOn,
     this.imagePath,
-    required this.storedAt,
-    required this.description,
+    this.storedAt,
+    this.description,
   });
 
   // Map<String, dynamic> toJson() {
