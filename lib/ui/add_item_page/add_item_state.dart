@@ -131,9 +131,11 @@ class AddItemState extends ChangeNotifier {
 
   void processBarcode() async {
     final scannedName = await BarcodeScannerHelper.scanBarcodeNormal();
+    log(scannedName);
     if (scannedName != "Error") {
       itemName =
-          await _barcodeLookupService.lookupProductName(code: _scannedName);
+          await _barcodeLookupService.lookupProductName(code: scannedName);
+      log(itemName!);
       if (itemName != "Product not found") {
         itemNameController.text = itemName!;
         notifyListeners();
