@@ -92,7 +92,7 @@ class CustomListTile extends StatelessWidget {
                       fontFamily: 'Outfit',
                       height: 1.2,
                       wordSpacing: 1.5,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
                       color: primaryBG,
                     ),
@@ -117,7 +117,7 @@ class CustomListTile extends StatelessWidget {
                       else if (isExpiresTodayText)
                         Text.rich(
                           TextSpan(
-                            text: "Expires ",
+                            text: "Expires \n",
                             style: TextStyle(
                               fontFamily: 'Outfit',
                               fontSize: 14,
@@ -139,7 +139,7 @@ class CustomListTile extends StatelessWidget {
                       else if (isExpiresInTwoWeeksText)
                         Text.rich(
                           TextSpan(
-                            text: "Expires in  ",
+                            text: "Expires in \n ",
                             style: TextStyle(
                               fontFamily: 'Outfit',
                               fontSize: 14,
@@ -161,7 +161,7 @@ class CustomListTile extends StatelessWidget {
                       else
                         Text.rich(
                           TextSpan(
-                            text: "Expires by ",
+                            text: "Expires by \n",
                             style: TextStyle(
                               fontFamily: 'Outfit',
                               fontSize: 14,

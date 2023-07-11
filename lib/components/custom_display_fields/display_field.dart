@@ -27,6 +27,7 @@ class CustomDisplayField extends StatelessWidget {
         children: [
           Container(
             height: 55,
+            width: 90,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10.0),
@@ -35,8 +36,8 @@ class CustomDisplayField extends StatelessWidget {
               color: Colors.blue.withOpacity(0.2),
             ),
             child: Container(
-              width: 110,
-              padding: const EdgeInsets.only(right: 16, left: 16),
+              width: 90,
+              padding: const EdgeInsets.only(right: 8, left: 8),
               decoration: const BoxDecoration(
                 border: BorderDirectional(
                   end: BorderSide(
@@ -50,24 +51,44 @@ class CustomDisplayField extends StatelessWidget {
                   labelText,
                   style: const TextStyle(
                     fontFamily: 'Outfit',
-                    fontSize: 14,
+                    fontSize: 12,
                     color: primaryBG,
                   ),
                 ),
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              valueText,
-              style: TextStyle(
-                fontFamily: 'Outfit',
-                fontSize: 16,
-                color: Colors.teal.shade500,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
+              child: Text(
+                valueText,
+                maxLines: 5,
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  fontSize: 16,
+                  color: Colors.teal.shade500,
+                ),
               ),
             ),
           )
+
+          // Container(
+          //   padding: const EdgeInsets.all(16),
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Text(
+          //       valueText,
+          //       softWrap: true,
+          //       overflow: TextOverflow.fade,
+          //       style: TextStyle(
+          //         fontFamily: 'Outfit',
+          //         fontSize: 16,
+          //         color: Colors.teal.shade500,
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
