@@ -28,7 +28,7 @@ class BackgroundService {
       service.stopSelf();
     });
 
-    Timer.periodic(const Duration(hours: 5), (Timer t) async {
+    Timer.periodic(const Duration(seconds: 10), (Timer t) async {
       final daysBeforeToNotify =
           await SharedPrefsService.loadDaysBeforeToNotifyFromPrefs();
       final items =
