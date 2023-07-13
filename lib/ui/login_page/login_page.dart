@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/custom_input_decoration/input_decoration.dart';
+import 'package:food_eye_fyp/components/success_alert_dialog.dart';
 import 'package:provider/provider.dart';
 import '../../utils/constants.dart';
 import '../register_page/register_page.dart';
@@ -249,10 +252,27 @@ class LoginPage extends StatelessWidget {
                                           );
                                         },
                                       )
-                                    : Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        '/home',
-                                        (route) => false,
+                                    : showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return const CustomSuccessAlertDialog(
+                                            imageAsset:
+                                                "assets/images/login-success.png",
+                                            title: "Login Success!",
+                                            subtitle:
+                                                "Your login was successful",
+                                            description:
+                                                "Welcome to the Food Eye App!",
+                                          );
+                                        },
+                                      ).then(
+                                        (value) {
+                                          Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/home',
+                                            (route) => false,
+                                          );
+                                        },
                                       );
                               }
                             },

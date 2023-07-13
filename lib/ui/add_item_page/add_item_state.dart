@@ -136,7 +136,7 @@ class AddItemState extends ChangeNotifier {
       itemName =
           await _barcodeLookupService.lookupProductName(code: scannedName);
       log(itemName!);
-      if (itemName != "Product not found") {
+      if (itemName != "Product not found" && itemName != "-1") {
         itemNameController.text = itemName!;
         notifyListeners();
       }

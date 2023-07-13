@@ -177,6 +177,7 @@ class EditItemState extends ChangeNotifier {
                 ? itemToEdit.imagePath
                 : defaultImage,
       );
+      notifyListeners();
       return await _itemService.updateItem(itemToEditID, updatedItem);
     } catch (error) {
       log('Error creating item: $error');

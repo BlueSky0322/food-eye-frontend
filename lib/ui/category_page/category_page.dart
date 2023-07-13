@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_eye_fyp/components/list_tile.dart';
 import 'package:food_eye_fyp/data/model/item_response.dart';
-import 'package:food_eye_fyp/ui/analytics_page/category_page_state.dart';
+import 'package:food_eye_fyp/ui/category_page/category_page_state.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
 

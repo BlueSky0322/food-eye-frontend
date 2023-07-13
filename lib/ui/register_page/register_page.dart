@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/custom_input_decoration/input_decoration.dart';
+import '../../components/error_alert_dialog.dart';
 import '../../utils/constants.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -276,7 +277,7 @@ class RegisterPage extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (context) {
-                                      return const CustomSuccessAlertDialog(
+                                      return const CustomErrorAlertDialog(
                                         imageAsset:
                                             'assets/images/error-logo.png',
                                         title: "Whoops!",
@@ -308,7 +309,7 @@ class RegisterPage extends StatelessWidget {
                                             ChangeNotifierProvider(
                                           create: (context) =>
                                               LoginPageState(currentContext),
-                                          child: LoginPage(),
+                                          child: const LoginPage(),
                                         ),
                                       ),
                                     );

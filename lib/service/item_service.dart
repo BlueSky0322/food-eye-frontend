@@ -5,7 +5,7 @@ import 'package:food_eye_fyp/data/model/item.dart';
 import 'package:http/http.dart';
 
 import '../data/model/item_response.dart';
-import '../utils/http_utils.dart';
+import '../utils/http_overrides.dart';
 
 class ItemService {
   final client = Client();

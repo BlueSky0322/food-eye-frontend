@@ -9,7 +9,7 @@ import 'package:food_eye_fyp/service/notification_service.dart';
 import 'package:food_eye_fyp/service/shared_preferences_service.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 
-import '../utils/http_utils.dart';
+import '../utils/http_overrides.dart';
 
 class BackgroundService {
   static bool isRegistered = false;
@@ -28,7 +28,7 @@ class BackgroundService {
       service.stopSelf();
     });
 
-    Timer.periodic(const Duration(seconds: 10), (Timer t) async {
+    Timer.periodic(const Duration(seconds: 5), (Timer t) async {
       final daysBeforeToNotify =
           await SharedPrefsService.loadDaysBeforeToNotifyFromPrefs();
       final items =

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/service/background_service.dart';
 import 'package:food_eye_fyp/service/shared_preferences_service.dart';
 import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/confirm_logout.dart';
+import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/notification_settings.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 
 Widget buildSettings(BuildContext context) {
@@ -43,35 +44,10 @@ Widget buildSettings(BuildContext context) {
           ),
           onTap: () {
             showDialog(
-              context: context,
-              builder: (context) {
-                int newDaysBeforeToNotify = 0;
-                return AlertDialog(
-                  title: const Text("Notification Settings"),
-                  content: TextField(
-                    onChanged: (value) {
-                      newDaysBeforeToNotify = int.parse(value);
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: "Days before expiration",
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () async {
-                        await SharedPrefsService.saveDaysBeforeToNotifyToPrefs(
-                            newDaysBeforeToNotify);
-                        await BackgroundService
-                            .restartDateCheckerBackgroundService();
-                        Navigator.pop(context);
-                      },
-                      child: const Text("Save"),
-                    ),
-                  ],
-                );
-              },
-            );
+                context: context,
+                builder: (context) {
+                  return const NotificationSettings();
+                });
           },
         ),
         ListTile(
@@ -87,7 +63,7 @@ Widget buildSettings(BuildContext context) {
           onTap: () {
             showDialog(
               context: context,
-              builder: (BuildContext context) => const ConfirmLogoutDialog(),
+              builder: (context) => const ConfirmLogoutDialog(),
             );
           },
         ),

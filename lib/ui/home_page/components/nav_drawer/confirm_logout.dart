@@ -24,21 +24,6 @@ class ConfirmLogoutDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: appbarText,
-          ),
-          child: const Text(
-            'Cancel',
-            style: TextStyle(
-              fontFamily: 'Outfit',
-              color: primaryBG,
-            ),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
           style: ButtonStyle(
             shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(
@@ -63,6 +48,21 @@ class ConfirmLogoutDialog extends StatelessWidget {
               '/splash',
               (route) => false,
             );
+          },
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: appbarText,
+          ),
+          child: const Text(
+            'Cancel',
+            style: TextStyle(
+              fontFamily: 'Outfit',
+              color: primaryBG,
+            ),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
           },
         ),
       ],
