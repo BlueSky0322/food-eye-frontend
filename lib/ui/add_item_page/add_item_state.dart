@@ -31,7 +31,6 @@ class AddItemState extends ChangeNotifier {
   // static const _100_YEARS = Duration(days: 365 * 100);
 
   XFile? _imageFile;
-  String _scannedName = "";
   String? itemName;
   String? itemType;
   int quantity = 1;

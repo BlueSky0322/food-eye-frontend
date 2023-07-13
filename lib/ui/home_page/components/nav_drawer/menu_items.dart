@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/service/background_service.dart';
-import 'package:food_eye_fyp/service/shared_preferences_service.dart';
 import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/confirm_logout.dart';
 import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/notification_settings.dart';
 import 'package:food_eye_fyp/utils/constants.dart';

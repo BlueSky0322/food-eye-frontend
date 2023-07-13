@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/custom_input_decoration/input_decoration.dart';
 import 'package:food_eye_fyp/components/success_alert_dialog.dart';
