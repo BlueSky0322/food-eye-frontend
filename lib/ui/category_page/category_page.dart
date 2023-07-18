@@ -7,7 +7,7 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/constants.dart';
-import '../common/nav_bar_state.dart';
+import '../bottom_nav_bar/nav_bar_state.dart';
 import '../edit_item_page/edit_page.dart';
 import '../edit_item_page/edit_page_state.dart';
 

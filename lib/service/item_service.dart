@@ -9,6 +9,7 @@ import '../utils/http_overrides.dart';
 
 class ItemService {
   final client = Client();
+
   Future<List<ItemResponseObject>> getAllItems() async {
     try {
       final response = await client.get(
@@ -20,7 +21,6 @@ class ItemService {
         List<ItemResponseObject> items = responseData
             .map((data) => ItemResponseObject.fromJson(data))
             .toList();
-        //print(items);
         return items;
       } else {
         log('API call failed with status code: ${response.statusCode}');

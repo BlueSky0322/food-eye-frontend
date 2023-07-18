@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/confirm_logout.dart';
-import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/notification_settings.dart';
+import 'package:food_eye_fyp/ui/home_page/components/settings_sidebar/confirm_logout.dart';
+import 'package:food_eye_fyp/ui/home_page/components/settings_sidebar/notification_settings.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 
 Widget buildSettings(BuildContext context) {

@@ -23,7 +23,7 @@ class NotificationService {
   Future<void> initNotification(context) async {
     _context ??= context;
     const androidInitialization =
-        AndroidInitializationSettings('FoodEye Alert');
+        AndroidInitializationSettings('just_eye_logo');
     const iOSInitialization = DarwinInitializationSettings();
 
     const initializationSettings = InitializationSettings(

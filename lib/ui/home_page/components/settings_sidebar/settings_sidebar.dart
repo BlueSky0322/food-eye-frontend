@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 
 import 'header.dart';
-import 'menu_items.dart';
+import 'sidebar_items.dart';
 
-class NavDrawer extends StatelessWidget {
-  const NavDrawer({super.key});
+class SettingsSidebar extends StatelessWidget {
+  const SettingsSidebar({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
+import 'package:food_eye_fyp/utils/expiry_status.dart';
 import 'package:intl/intl.dart';
 import '../data/model/item_response.dart';
 
@@ -12,29 +13,18 @@ class CustomListTile extends StatelessWidget {
     super.key,
     required this.item,
   });
-  String getExpiryStatus(DateTime expiryDate) {
-    final currentDate = DateTime.now();
-    final difference = expiryDate.difference(currentDate).inDays;
-
-    if (difference < 0) {
-      return 'Expired';
-    } else if (difference == 0) {
-      return 'Expires TODAY';
-    } else if (difference <= 14) {
-      return '$difference day(s)';
-    } else {
-      return DateFormat.yMd().format(expiryDate);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final bool isExpiredText =
-        getExpiryStatus(item.dateExpiresOn!).contains("Expired");
+        ExpiryDateDisplayHelper.getExpiryStatus(item.dateExpiresOn!)
+            .contains("Expired");
     final bool isExpiresTodayText =
-        getExpiryStatus(item.dateExpiresOn!).contains("Expires TODAY");
+        ExpiryDateDisplayHelper.getExpiryStatus(item.dateExpiresOn!)
+            .contains("Expires TODAY");
     final bool isExpiresInTwoWeeksText =
-        getExpiryStatus(item.dateExpiresOn!).contains(RegExp(r'day\(s\)'));
+        ExpiryDateDisplayHelper.getExpiryStatus(item.dateExpiresOn!)
+            .contains(RegExp(r'day\(s\)'));
 
     log("[DEBUG] list tile rebuilding");
 
@@ -147,7 +137,8 @@ class CustomListTile extends StatelessWidget {
                             ),
                             children: [
                               TextSpan(
-                                text: getExpiryStatus(item.dateExpiresOn!),
+                                text: ExpiryDateDisplayHelper.getExpiryStatus(
+                                    item.dateExpiresOn!),
                                 style: TextStyle(
                                   fontFamily: 'Outfit',
                                   fontSize: 14,

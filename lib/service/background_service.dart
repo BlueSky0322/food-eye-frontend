@@ -13,15 +13,12 @@ import '../utils/http_overrides.dart';
 
 class BackgroundService {
   static bool isRegistered = false;
-  final itemService = ItemService();
+  static final itemService = ItemService();
+  static final notificationService = NotificationService();
 
   @pragma('vm:entry-point')
   static Future<void> _onStart(ServiceInstance service) async {
-    //String? recentNotification;
     HttpOverrides.global = MyHttpOverrides();
-    final notificationService = NotificationService();
-    final itemService = ItemService();
-
     DartPluginRegistrant.ensureInitialized();
 
     service.on('stopService').listen((event) {
@@ -49,15 +46,6 @@ class BackgroundService {
         }
       }
     });
-  }
-
-  static void unregisterDateCheckerBackgroundService() async {
-    isRegistered = false;
-    final service = FlutterBackgroundService();
-    var isRunning = await service.isRunning();
-    if (isRunning) {
-      service.invoke("stopService");
-    }
   }
 
   static void registerDateCheckerBackgroundService() async {
@@ -91,6 +79,15 @@ class BackgroundService {
         onForeground: _onStart,
       ),
     );
+  }
+
+  static void unregisterDateCheckerBackgroundService() async {
+    isRegistered = false;
+    final service = FlutterBackgroundService();
+    var isRunning = await service.isRunning();
+    if (isRunning) {
+      service.invoke("stopService");
+    }
   }
 
   static Future<void> restartDateCheckerBackgroundService() async {

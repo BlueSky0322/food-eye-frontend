@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:intl/intl.dart';
 
 String parseExpiryDate(String text) {
@@ -15,20 +14,15 @@ String parseExpiryDate(String text) {
     'd MMMM yyyy', // e.g., "4 June 2023"
     'MMMM d yyyy', // e.g., "June 4 2023"
   ];
-
   DateTime? expiryDate;
-
   for (final format in formats) {
     try {
       final DateFormat dateFormat = DateFormat(format);
-
       expiryDate = dateFormat.parseStrict(text);
-
       if (expiryDate.year < 100) {
         final int? day = int.tryParse(text.substring(0, 2));
         final int? month = int.tryParse(text.substring(3, 5));
         final int? year = int.tryParse(text.substring(6, 8));
-
         if (day != null && month != null && year != null) {
           expiryDate = DateTime(2000 + year, month, day);
           log('Successfully parsed special expiry date: $expiryDate');
@@ -40,10 +34,9 @@ String parseExpiryDate(String text) {
       // Parsing failed for the current format, try the next one
     }
   }
-
   if (expiryDate != null) {
     return expiryDate.toString();
   } else {
-    return text;
+    return DateTime.now().toString();
   }
 }

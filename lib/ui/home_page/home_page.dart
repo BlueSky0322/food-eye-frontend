@@ -4,7 +4,7 @@ import 'package:food_eye_fyp/data/model/item_response.dart';
 import 'package:food_eye_fyp/ui/edit_item_page/edit_page.dart';
 import 'package:food_eye_fyp/ui/edit_item_page/edit_page_state.dart';
 import 'package:food_eye_fyp/components/list_tile.dart';
-import 'package:food_eye_fyp/ui/home_page/components/nav_drawer/nav_drawer.dart';
+import 'package:food_eye_fyp/ui/home_page/components/settings_sidebar/settings_sidebar.dart';
 import 'package:food_eye_fyp/ui/home_page/home_page_state.dart';
 import 'package:food_eye_fyp/ui/items_detail_page/items_detail_page.dart';
 import 'package:food_eye_fyp/ui/items_detail_page/items_detail_page_state.dart';
@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 // import '../../data/model/item.dart';
 import '../../utils/constants.dart';
-import '../common/nav_bar_state.dart';
+import '../bottom_nav_bar/nav_bar_state.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
     final state = Provider.of<HomePageState>(context);
     return Scaffold(
       backgroundColor: pageBG,
-      endDrawer: const NavDrawer(),
+      endDrawer: const SettingsSidebar(),
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -331,12 +331,15 @@ class HomePage extends StatelessWidget {
                         builder: (context, isDescending, _) {
                           return InkWell(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
                                   builder: (context) => ChangeNotifierProvider(
-                                        create: (context) =>
-                                            ItemDetailState(sortedItems[index]),
-                                        child: const ItemDetail(),
-                                      )));
+                                    create: (context) =>
+                                        ItemDetailState(sortedItems[index]),
+                                    child: const ItemDetail(),
+                                  ),
+                                ),
+                              );
                             },
                             child: Slidable(
                               endActionPane: ActionPane(
