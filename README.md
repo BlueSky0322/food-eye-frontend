@@ -1,4 +1,4 @@
-# food_eye_fyp
+# FoodEye
 
 Final Year Project
 
