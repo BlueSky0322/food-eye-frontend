@@ -49,25 +49,36 @@ class LoginPage extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 'assets/images/banner-logo.png',
                 fit: BoxFit.cover,
               ),
-              const Text(
-                "Welcome Back!",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontFamily: 'Outfit',
-                ),
-              ),
-              const Text(
-                "Enter email and password to continue.",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: 'Outfit',
+              const FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 32, right: 32),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Welcome Back!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontFamily: 'Outfit',
+                        ),
+                      ),
+                      Text(
+                        "Enter email and password to continue.",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontFamily: 'Outfit',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -133,44 +144,47 @@ class LoginPage extends StatelessWidget {
                                 ),
                               );
                             }),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const Text(
-                              "Dont have an account?",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Outfit',
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ChangeNotifierProvider(
-                                        create: (context) =>
-                                            RegisterPageState(context),
-                                        child: const RegisterPage(),
-                                      ),
-                                    ));
-                              },
-                              child: const Text(
-                                "Create one",
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                "Dont have an account?",
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 84, 229, 240),
+                                  color: Colors.white,
                                   fontSize: 16,
                                   fontFamily: 'Outfit',
-                                  decoration: TextDecoration.underline,
-                                  decorationColor:
-                                      Color.fromARGB(255, 84, 229, 240),
                                 ),
                               ),
-                            )
-                          ],
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChangeNotifierProvider(
+                                          create: (context) =>
+                                              RegisterPageState(context),
+                                          child: const RegisterPage(),
+                                        ),
+                                      ));
+                                },
+                                child: const Text(
+                                  "Create one",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 84, 229, 240),
+                                    fontSize: 16,
+                                    fontFamily: 'Outfit',
+                                    decoration: TextDecoration.underline,
+                                    decorationColor:
+                                        Color.fromARGB(255, 84, 229, 240),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,

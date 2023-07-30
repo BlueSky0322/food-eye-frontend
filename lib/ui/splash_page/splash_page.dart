@@ -28,78 +28,83 @@ class SplashPage extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/splash-page-logo.png',
-                fit: BoxFit.contain,
-              ),
-              SizedBox(
-                width: 250,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (context) => RegisterPageState(context),
-                          child: const RegisterPage(),
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        "Register",
-                        style: TextStyle(
-                            fontFamily: 'Outfit',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                            color: primaryBtnText),
-                      ),
-                    ],
+          child: Center(
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/splash-page-logo.png',
+                    fit: BoxFit.contain,
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: 250,
-                height: 50,
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
+                  SizedBox(
+                    width: 250,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ChangeNotifierProvider(
-                              create: (context) => LoginPageState(context),
-                              child: LoginPage(),
+                              create: (context) => RegisterPageState(context),
+                              child: const RegisterPage(),
                             ),
-                          ));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: primaryBtnBG),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text("Login",
+                          ),
+                        );
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            "Register",
                             style: TextStyle(
                                 fontFamily: 'Outfit',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
-                                color: Colors.white)),
-                      ],
-                    )),
-              )
-            ],
+                                color: primaryBtnText),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 250,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => LoginPageState(context),
+                                  child: LoginPage(),
+                                ),
+                              ));
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryBtnBG),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text("Login",
+                                style: TextStyle(
+                                    fontFamily: 'Outfit',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    color: Colors.white)),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

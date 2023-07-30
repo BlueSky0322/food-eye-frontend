@@ -43,21 +43,27 @@ class CustomSuccessAlertDialog extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontFamily: 'Outfit',
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontFamily: 'Outfit',
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Text(
-                subtitle,
-                style: TextStyle(
-                  color: Colors.green.shade700,
-                  fontFamily: 'Outfit',
-                  fontSize: 14,
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.green.shade700,
+                    fontFamily: 'Outfit',
+                    fontSize: 14,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -65,6 +71,7 @@ class CustomSuccessAlertDialog extends StatelessWidget {
               ),
               Text(
                 description,
+                softWrap: true,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.green.shade700,
