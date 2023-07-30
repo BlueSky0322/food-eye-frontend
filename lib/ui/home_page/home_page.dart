@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                 image: const DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    'assets/images/card-bg-1.png',
+                    'assets/images/card-bg.png',
                   ),
                 ),
                 boxShadow: [
