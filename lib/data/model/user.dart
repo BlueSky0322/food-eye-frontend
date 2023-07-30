@@ -1,4 +1,4 @@
-class NewUser {
+class User {
   String? email;
   String? password;
   String? name;
@@ -6,7 +6,7 @@ class NewUser {
   String? address;
   DateTime? dateOfBirth;
 
-  NewUser({
+  User({
     this.email,
     this.password,
     this.name,
@@ -15,8 +15,8 @@ class NewUser {
     this.dateOfBirth,
   });
 
-  static List<NewUser> users = [
-    NewUser(
+  static List<User> userList = [
+    User(
       email: 'a@a.a',
       password: '123123',
       name: 'User 1',
