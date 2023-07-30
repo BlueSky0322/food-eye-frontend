@@ -44,7 +44,7 @@ Widget buildSettings(BuildContext context) {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return const NotificationSettings();
+                  return NotificationSettings();
                 });
           },
         ),

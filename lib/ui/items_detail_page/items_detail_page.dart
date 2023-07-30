@@ -98,7 +98,7 @@ class ItemDetail extends StatelessWidget {
               ),
               CustomDisplayField(
                 labelText: "Stored at",
-                valueText: state.item.itemType!,
+                valueText: state.item.storedAt!,
               ),
               const SizedBox(
                 height: 16,
