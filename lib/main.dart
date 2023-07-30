@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/ui/bottom_nav_bar/nav_bar_state.dart';
 import 'package:food_eye_fyp/ui/bottom_nav_bar/nav_bar_wrapper.dart';
+import 'package:food_eye_fyp/ui/launch_page/launch_page.dart';
 import 'package:food_eye_fyp/ui/splash_page/splash_page.dart';
 import 'package:food_eye_fyp/utils/http_overrides.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
         '/splash': (context) => const SplashPage(),
       },
-      home: const SplashPage(),
+      home: const LaunchPage(),
     );
   }
 }
