@@ -283,7 +283,7 @@ class RegisterPage extends StatelessWidget {
                                         title: "Whoops!",
                                         subtitle: "Something went wrong...",
                                         description:
-                                            "Sorry, but please try again later!",
+                                            "Account already exists, try something different",
                                       );
                                     },
                                   );

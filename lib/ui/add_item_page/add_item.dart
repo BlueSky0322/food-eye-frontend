@@ -133,15 +133,6 @@ class AddItemPage extends StatelessWidget {
                               },
                               controller: state.purchasedDateController,
                               onPressed: () async {
-                                // final selectedDate =
-                                //     await state.selectDate(context, 0);
-                                // if (selectedDate != null) {
-                                //   // Update the value or perform any necessary actions
-                                //   state.datePurchased = selectedDate;
-                                //   state.purchasedDateController.text =
-                                //       DateFormat('yyyy-MM-dd')
-                                //           .format(selectedDate);
-                                // }
                                 await state.assignPurchaseDate();
                               },
                               labelText: "Purchased On",

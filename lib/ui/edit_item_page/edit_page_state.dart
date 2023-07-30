@@ -153,7 +153,12 @@ class EditItemState extends ChangeNotifier {
       expiryDateController.text =
           DateFormat('yyyy-MM-dd').format(itemToEdit.dateExpiresOn!);
       storedAt = itemToEdit.storedAt;
-      descriptionController.text = itemToEdit.description!;
+      if (itemToEdit.description != null) {
+        descriptionController.text = itemToEdit.description!;
+      } else {
+        descriptionController.clear();
+      }
+
       notifyListeners();
     });
   }

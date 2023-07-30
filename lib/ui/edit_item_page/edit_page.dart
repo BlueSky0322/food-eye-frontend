@@ -262,6 +262,14 @@ class EditItem extends StatelessWidget {
                                             "The item has been successfully updated.",
                                       );
                                     },
+                                  ).then(
+                                    (value) {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        '/home',
+                                        (route) => false,
+                                      );
+                                    },
                                   );
                                 } else {
                                   showDialog(
