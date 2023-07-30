@@ -77,7 +77,6 @@ class ItemService {
   }
 
   Future<ItemResponseObject> getItemByID(int itemID) async {
-    print("Entered getitembyid");
     try {
       final response = await client.get(
         Uri.parse("$usbDebugURL/api/FoodEyeItems/GetItemByID/$itemID"),

@@ -134,7 +134,6 @@ class EditItemState extends ChangeNotifier {
           .then((productName) {
         itemName = productName;
         itemNameController.text = itemName!;
-        // print(itemName);
         notifyListeners();
       });
     } on PlatformException {

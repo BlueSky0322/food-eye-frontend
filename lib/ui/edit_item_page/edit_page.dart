@@ -24,7 +24,7 @@ class EditItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<EditItemState>(context);
-    print(state.itemToEditID);
+
     final ImagePicker picker = ImagePicker();
 
     return GestureDetector(
