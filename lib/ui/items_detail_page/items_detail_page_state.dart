@@ -11,9 +11,17 @@ class ItemDetailState extends ChangeNotifier {
   ItemDetailState(this.item);
 
   ImageProvider<Object> get pickedImage {
-    if (item.imagePath != null && item.imagePath != defaultImage) {
-      return FileImage(File(item.imagePath!));
-    } else {
+    try {
+      if (item.imagePath == null || item.imagePath == defaultImage) {
+        return const AssetImage(
+          defaultImage,
+        );
+      } else if (item.imagePath!.startsWith("assets/images/")) {
+        return AssetImage(item.imagePath!);
+      } else {
+        return FileImage(File(item.imagePath!));
+      }
+    } on Exception {
       return const AssetImage(
         defaultImage,
       );

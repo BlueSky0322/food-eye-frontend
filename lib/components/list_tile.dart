@@ -48,6 +48,9 @@ class CustomListTile extends StatelessWidget {
               backgroundImage: (() {
                 if (item.imagePath == null || item.imagePath == defaultImage) {
                   return Image.asset(defaultImage).image;
+                } else if (item.imagePath != null &&
+                    item.imagePath!.startsWith("assets/images/")) {
+                  return Image.asset(item.imagePath!).image;
                 } else {
                   try {
                     return FileImage(File(item.imagePath!));
