@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/data/model/new_user.dart';
+import 'package:food_eye_fyp/data/model/user.dart';
 
 class RegisterPageState extends ChangeNotifier {
   final BuildContext context;
@@ -14,7 +14,7 @@ class RegisterPageState extends ChangeNotifier {
   DateTime? dateOfBirth;
   String address = '';
 
-  List<NewUser> newUserList = [];
+  List<User> newUserList = [];
 
   RegisterPageState(this.context);
 
@@ -89,7 +89,22 @@ class RegisterPageState extends ChangeNotifier {
   }
 
   bool register() {
-    NewUser newUser = NewUser(
+    // Check if email or password already exists
+    bool isEmailExist = User.userList.any((user) => user.email == email);
+    bool isPasswordExist =
+        User.userList.any((user) => user.password == password);
+
+    if (isEmailExist) {
+      log("Email already exists");
+      return false;
+    }
+
+    if (isPasswordExist) {
+      log("Password already exists");
+      return false;
+    }
+
+    User newUser = User(
         email: email,
         password: password,
         name: name,
@@ -97,7 +112,7 @@ class RegisterPageState extends ChangeNotifier {
         address: address,
         dateOfBirth: dateOfBirth);
 
-    NewUser.users.add(newUser);
+    User.userList.add(newUser);
     log(newUserList.toString());
     log("${newUser.email}");
     log("${newUser.password}");

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/data/model/new_user.dart';
+import 'package:food_eye_fyp/data/model/user.dart';
 
 import '../../data/model/auth_user.dart';
 
@@ -50,7 +50,7 @@ class LoginPageState extends ChangeNotifier {
     log("${user.email}:${user.password}");
 
     // Check if the email and password exist in the list of users
-    bool isValidUser = NewUser.users
+    bool isValidUser = User.userList
         .any((u) => u.email == user.email && u.password == user.password);
 
     if (isValidUser) {
