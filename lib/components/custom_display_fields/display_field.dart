@@ -60,7 +60,7 @@ class CustomDisplayField extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 8, 4),
               child: Text(
                 valueText,
                 maxLines: 5,

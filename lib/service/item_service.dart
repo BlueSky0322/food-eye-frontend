@@ -1,26 +1,30 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:food_eye_fyp/data/model/item.dart';
+import 'package:food_eye_fyp/data/item.dart';
+import 'package:food_eye_fyp/data/request_response_model/add_item_request.dart';
+import 'package:food_eye_fyp/data/request_response_model/update_item_request.dart';
+import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
-import '../data/model/item_response.dart';
+import '../data/request_response_model/item_response.dart';
 import '../utils/http_overrides.dart';
 
 class ItemService {
   final client = Client();
 
-  Future<List<ItemResponseObject>> getAllItems() async {
+  Future<List<ItemResponse>> getAllItems(String? userId) async {
     try {
       final response = await client.get(
-        Uri.parse("$usbDebugURL/api/FoodEyeItems/GetAllItems"),
+        Uri.parse("$apiURL/Item/GetAllItems/$userId"),
       );
 
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);
-        List<ItemResponseObject> items = responseData
-            .map((data) => ItemResponseObject.fromJson(data))
-            .toList();
+        List<ItemResponse> items =
+            responseData.map((data) => ItemResponse.fromJson(data)).toList();
         return items;
       } else {
         log('API call failed with status code: ${response.statusCode}');
@@ -32,17 +36,18 @@ class ItemService {
     }
   }
 
-  Future<List<ItemResponseObject>> getItemsExpiringWithin(int days) async {
+  Future<List<ItemResponse>> getItemsExpiringWithin(
+      int days, String? userId) async {
+    log("$userId");
     try {
       final response = await client.get(
-        Uri.parse('$usbDebugURL/api/FoodEyeItems/GetItemsExpiringWithin/$days'),
+        Uri.parse('$apiURL/Item/GetItemsExpiringWithin/$days/$userId'),
       );
 
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);
-        List<ItemResponseObject> items = responseData
-            .map((data) => ItemResponseObject.fromJson(data))
-            .toList();
+        List<ItemResponse> items =
+            responseData.map((data) => ItemResponse.fromJson(data)).toList();
         return items;
       } else {
         log('API call failed with status code: ${response.statusCode}');
@@ -54,17 +59,16 @@ class ItemService {
     }
   }
 
-  Future<List<ItemResponseObject>> getFreshItems() async {
+  Future<List<ItemResponse>> getFreshItems(String? userId) async {
     try {
       final response = await client.get(
-        Uri.parse('$usbDebugURL/api/FoodEyeItems/GetFreshItems'),
+        Uri.parse('$apiURL/Item/GetFreshItems/$userId'),
       );
 
       if (response.statusCode == 200) {
         final List<dynamic> responseData = json.decode(response.body);
-        List<ItemResponseObject> items = responseData
-            .map((data) => ItemResponseObject.fromJson(data))
-            .toList();
+        List<ItemResponse> items =
+            responseData.map((data) => ItemResponse.fromJson(data)).toList();
         return items;
       } else {
         log('API call failed with status code: ${response.statusCode}');
@@ -76,15 +80,15 @@ class ItemService {
     }
   }
 
-  Future<ItemResponseObject> getItemByID(int itemID) async {
+  Future<ItemResponse> getItemByID(int itemID) async {
     try {
       final response = await client.get(
-        Uri.parse("$usbDebugURL/api/FoodEyeItems/GetItemByID/$itemID"),
+        Uri.parse("$apiURL/Item/GetItemByID/$itemID"),
       );
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
-        ItemResponseObject item = ItemResponseObject.fromJson(responseData);
+        ItemResponse item = ItemResponse.fromJson(responseData);
         // log(item);
         return item;
       } else {
@@ -95,11 +99,11 @@ class ItemService {
       log('Error getting items: $error');
       // return null;
     }
-    return ItemResponseObject();
+    return ItemResponse();
   }
 
   Future<void> deleteItem(int itemID) async {
-    final apiUrl = '$usbDebugURL/api/FoodEyeItems/DeleteFEItem/$itemID';
+    final apiUrl = '$apiURL/Item/DeleteItem/$itemID';
     final response = await client.delete(Uri.parse(apiUrl));
     try {
       if (response.statusCode == 204) {
@@ -113,12 +117,12 @@ class ItemService {
     }
   }
 
-  Future<bool> updateItem(int id, Item updatedItem) async {
-    final url = Uri.parse('$usbDebugURL/api/FoodEyeItems/UpdateFEItem/$id');
+  Future<bool> standardUpdateItem(UpdateItemRequest updateItemRequest) async {
+    final url = Uri.parse('$apiURL/Item/StandardUpdateItem');
 
     try {
       // Convert the updatedItem object to JSON
-      final jsonData = json.encode(updatedItem.toJson());
+      final jsonData = json.encode(updateItemRequest.toJson());
 
       // Make the PUT request
       final response = await client.put(
@@ -127,11 +131,11 @@ class ItemService {
         body: jsonData,
       );
 
-      if (response.statusCode == 204) {
+      if (response.statusCode == 200) {
         log('Item updated successfully!');
         return true;
       } else {
-        log('API call failed with status code: ${response.statusCode}');
+        log('SUI API call failed with status code: ${response.statusCode}');
         return false;
       }
     } catch (error) {
@@ -140,21 +144,76 @@ class ItemService {
     }
   }
 
-  Future<bool> addItem(Item newItem) async {
-    final url = Uri.parse('$usbDebugURL/api/FoodEyeItems/AddFEItem');
-
+  Future<bool> addItem(AddItemRequest newItem) async {
+    final url = Uri.parse('$apiURL/Item/AddItem');
+    // Convert the AddItemRequest object to JSON
+    final jsonData = json.encode(newItem.toJson());
     try {
-      // Convert the updatedItem object to JSON
-      final jsonData = json.encode(newItem.toJson());
+      // Create a multipart request
+      final request = http.MultipartRequest('POST', url);
 
-      // Make the PUT request
-      final response = await client.post(
-        url,
-        headers: {"Content-Type": "application/json"},
-        body: jsonData,
-      );
+      // Check if an image was provided
+      if (newItem.imagePath != null &&
+          newItem.imagePath!.isNotEmpty &&
+          newItem.imagePath != defaultImage) {
+        // Add the image file to the request
+        final imageFile = await http.MultipartFile.fromPath(
+          'itemImage',
+          newItem.imagePath!,
+        );
+        request.files.add(imageFile);
+      }
+
+      // Add the JSON data as a field in the multipart request
+      request.fields['itemData'] = jsonData;
+
+      final response = await request.send();
 
       if (response.statusCode == 201) {
+        log('Item added successfully!');
+        return true;
+      } else {
+        log('API call failed with status code: ${response.statusCode}');
+        return false;
+      }
+
+      // Send the multipart request and wait for the response
+    } catch (error) {
+      log('Error adding item: $error');
+      return false;
+    }
+  }
+
+  Future<bool> updateItem(UpdateItemRequest updateItemRequest) async {
+    final url = Uri.parse('$apiURL/Item/UpdateItem');
+
+    try {
+      // Create a multipart request
+      final request = http.MultipartRequest('PUT', url);
+
+      // Convert the AddItemRequest object to JSON
+      final jsonData = json.encode(updateItemRequest.toJson());
+
+      // Check if an image was provided
+      if (updateItemRequest.imagePath != null &&
+          updateItemRequest.imagePath!.isNotEmpty &&
+          !updateItemRequest.imagePath!.startsWith('https://')) {
+        // Add the image file to the request
+        final imageFile = await http.MultipartFile.fromPath(
+          'itemImage',
+          updateItemRequest.imagePath!,
+        );
+
+        request.files.add(imageFile);
+      }
+
+      // Add the JSON data as a field in the multipart request
+      request.fields['itemData'] = jsonData;
+
+      // Send the multipart request and wait for the response
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
         log('Item updated successfully!');
         return true;
       } else {
