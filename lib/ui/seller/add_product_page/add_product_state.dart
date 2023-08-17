@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class AddProductState extends ChangeNotifier {
   String? userId;
   XFile? _imageFile;
   XFile? get imageFile => _imageFile;
+  File? image;
+  double? mb;
 
   late UserProvider userProvider;
   AddProductState(this.context) {
@@ -84,6 +87,16 @@ class AddProductState extends ChangeNotifier {
 
   ImageProvider<Object> get pickedImage {
     if (_imageFile != null) {
+      if (_imageFile!.path != defaultImage) {
+        image = File(_imageFile!.path);
+        final bytes = image!.lengthSync();
+        final kb = bytes / 1024;
+        mb = (kb / 1024);
+        log("$mb bytes");
+      } else {
+        mb = 0;
+      }
+
       return Image.file(
         File(_imageFile!.path),
         fit: BoxFit.cover,
