@@ -143,7 +143,8 @@ class CustomListTile extends StatelessWidget {
                               ),
                               children: [
                                 TextSpan(
-                                  text: "RM ${product.price}",
+                                  text:
+                                      "RM ${product.price!.toStringAsFixed(2)}",
                                   style: TextStyle(
                                     fontFamily: 'Outfit',
                                     fontSize: 12,
