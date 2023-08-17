@@ -115,6 +115,26 @@ class CustomOrderCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   const Text(
+                    "Order Details: ",
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 82, 105, 95),
+                    ),
+                  ),
+                  Text(
+                    order.orderDetails,
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  const Text(
                     "Order Status: ",
                     style: TextStyle(
                       fontFamily: 'Outfit',
