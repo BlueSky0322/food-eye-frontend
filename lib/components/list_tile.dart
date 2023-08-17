@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:food_eye_fyp/utils/expiry_status.dart';
 import 'package:intl/intl.dart';
-import '../data/model/item_response.dart';
+import '../data/request_response_model/item_response.dart';
 
 class CustomListTile extends StatelessWidget {
-  final ItemResponseObject item;
+  final ItemResponse item;
   const CustomListTile({
     super.key,
     required this.item,
@@ -45,20 +45,19 @@ class CustomListTile extends StatelessWidget {
             child: CircleAvatar(
               radius: 35.0,
               backgroundColor: pageBG,
-              backgroundImage: (() {
-                if (item.imagePath == null || item.imagePath == defaultImage) {
-                  return Image.asset(defaultImage).image;
-                } else if (item.imagePath != null &&
-                    item.imagePath!.startsWith("assets/images/")) {
-                  return Image.asset(item.imagePath!).image;
-                } else {
-                  try {
-                    return FileImage(File(item.imagePath!));
-                  } catch (e) {
-                    return Image.asset(defaultImage).image;
-                  }
-                }
-              })(),
+              backgroundImage: () {
+                return Image.network(
+                  item.itemImageURL!,
+                  errorBuilder: (context, error, stackTrace) {
+                    log('Failed to load network image: $error');
+                    return const CircleAvatar(
+                      radius: 35.0,
+                      backgroundColor: pageBG,
+                      backgroundImage: NetworkImage(defaultImage),
+                    );
+                  },
+                ).image;
+              }(),
             ),
           ),
           const SizedBox(

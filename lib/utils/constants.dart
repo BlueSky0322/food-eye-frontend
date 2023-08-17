@@ -19,8 +19,11 @@ const String rapidApiKey =
     "0ddcb48f11msh7f0b44853126888p15f717jsn132453386804"; // RapidAPI key
 
 // Default Image
+// const String defaultImage =
+//     "assets/images/image-placeholder.png"; // Default image path
+// Default Image
 const String defaultImage =
-    "assets/images/image-placeholder.png"; // Default image path
+    "https://foodeyebucket.s3.amazonaws.com/images/default-item-image.jpg"; // Default image path
 
 // Notification Channels and IDs
 const String feItemChannelId =

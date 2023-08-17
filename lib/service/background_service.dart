@@ -25,11 +25,12 @@ class BackgroundService {
       service.stopSelf();
     });
 
-    Timer.periodic(const Duration(seconds: 5), (Timer t) async {
+    Timer.periodic(const Duration(seconds: 10), (Timer t) async {
       final daysBeforeToNotify =
           await SharedPrefsService.loadDaysBeforeToNotifyFromPrefs();
+      final userId = await SharedPrefsService.loadUserId();
       final items =
-          await itemService.getItemsExpiringWithin(daysBeforeToNotify);
+          await itemService.getItemsExpiringWithin(daysBeforeToNotify, userId);
       if (items.isNotEmpty) {
         if (items.length == 1) {
           for (final item in items) {
