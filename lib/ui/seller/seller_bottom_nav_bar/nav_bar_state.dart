@@ -1,6 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:food_eye_fyp/ui/seller/add_item_page/add_item.dart';
-import 'package:food_eye_fyp/ui/seller/add_item_page/add_item_state.dart';
 import 'package:food_eye_fyp/ui/seller/orders_page/orders_page.dart';
 import 'package:food_eye_fyp/ui/seller/orders_page/orders_page_state.dart';
 import 'package:food_eye_fyp/ui/seller/products_page/products_page.dart';

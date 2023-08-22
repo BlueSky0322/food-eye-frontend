@@ -5,7 +5,6 @@ import 'package:food_eye_fyp/data/request_response_model/product_response.dart';
 import 'package:food_eye_fyp/provider/user_provider.dart';
 import 'package:food_eye_fyp/service/product_service.dart';
 import 'package:food_eye_fyp/ui/seller/products_page/sorting_options_popup/sorting_options.dart';
-import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class ProductsPageState extends ChangeNotifier {

@@ -131,7 +131,6 @@ class EditProductState extends ChangeNotifier {
       productDescController.text = productToEdit.productDesc!;
       dateAddedController.text =
           DateFormat('yyyy-MM-dd').format(productToEdit.dateAdded!);
-      ;
       priceController.text = productToEdit.price!.toString();
       shelfLifeController.text = productToEdit.shelfLife!.toString();
       status = productToEdit.status;

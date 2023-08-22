@@ -109,7 +109,7 @@ class CustomGridTile extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 30,
                   child: ElevatedButton(

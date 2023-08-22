@@ -9,7 +9,6 @@ import 'package:food_eye_fyp/ui/seller/edit_product_page/edit_product_state.dart
 import 'package:food_eye_fyp/ui/seller/products_detail_page/products_detail_page.dart';
 import 'package:food_eye_fyp/ui/seller/products_detail_page/products_detail_page_state.dart';
 import 'package:food_eye_fyp/ui/seller/products_page/products_page_state.dart';
-import 'package:food_eye_fyp/ui/seller/seller_bottom_nav_bar/nav_bar_state.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:provider/provider.dart';
 

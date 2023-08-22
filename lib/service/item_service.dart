@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
-import 'package:food_eye_fyp/data/item.dart';
 import 'package:food_eye_fyp/data/request_response_model/add_item_request.dart';
 import 'package:food_eye_fyp/data/request_response_model/update_item_request.dart';
 import 'package:food_eye_fyp/utils/constants.dart';

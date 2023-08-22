@@ -164,7 +164,7 @@ class EditProductPage extends StatelessWidget {
                       const SizedBox(
                         height: 32,
                       ),
-                      Container(
+                      SizedBox(
                         width: 225,
                         height: 50,
                         child: ElevatedButton(

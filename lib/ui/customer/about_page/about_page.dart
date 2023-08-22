@@ -60,7 +60,7 @@ class AboutPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 0, 16),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 const Padding(

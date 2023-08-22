@@ -4,10 +4,6 @@ import 'package:food_eye_fyp/ui/customer/customer_home_page/customer_home_page.d
 import 'package:food_eye_fyp/ui/customer/customer_home_page/customer_home_page_state.dart';
 import 'package:food_eye_fyp/ui/customer/customer_order_page/customer_order_page.dart';
 import 'package:food_eye_fyp/ui/customer/customer_order_page/customer_order_page_state.dart';
-import 'package:food_eye_fyp/ui/seller/add_item_page/add_item.dart';
-import 'package:food_eye_fyp/ui/seller/add_item_page/add_item_state.dart';
-import 'package:food_eye_fyp/ui/seller/category_page/category_page.dart';
-import 'package:food_eye_fyp/ui/seller/category_page/category_page_state.dart';
 import 'package:provider/provider.dart';
 
 class CustNavBarState extends ChangeNotifier {
@@ -18,7 +14,7 @@ class CustNavBarState extends ChangeNotifier {
     //   create: (context) => AddItemState(context),
     //   child: const AddItemPage(),
     // ),
-    AboutPage(),
+    const AboutPage(),
     ChangeNotifierProvider(
       create: (context) => CustomerHomePageState(context),
       child: const CustomerHomePage(),
