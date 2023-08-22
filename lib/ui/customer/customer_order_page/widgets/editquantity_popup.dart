@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/components/custom_input_fields/order_fields/text_field.dart';
 import 'package:food_eye_fyp/components/error_alert_dialog.dart';
 import 'package:food_eye_fyp/components/success_alert_dialog.dart';
 import 'package:food_eye_fyp/data/request_response_model/customer_order_response.dart';
@@ -11,9 +12,10 @@ import 'package:input_quantity/input_quantity.dart';
 // ignore: must_be_immutable
 class EditQuantityPopup extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+
   final CustOrderPageState state;
   final CustOrderResponse order;
-  String orderDetails = "";
+  final _textFieldController = TextEditingController();
 
   EditQuantityPopup({
     super.key,
@@ -25,9 +27,10 @@ class EditQuantityPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _textFieldController.text = order.orderDetails;
     return AlertDialog(
       title: const Text(
-        "Preorder",
+        "Edit Order",
         style: TextStyle(
           fontFamily: 'Outfit',
           color: primaryBG,
@@ -44,6 +47,21 @@ class EditQuantityPopup extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  CustomTextFormField(
+                    validator: null,
+                    onChanged: (s) => state.orderDetails = s,
+                    controller: _textFieldController,
+                    labelText: "Order Details",
+                    hintText: "Tell the seller something",
+                    prefixicon: Icons.description_rounded,
+                    suffixIcon: Icons.cancel,
+                    onPressed: () {
+                      _textFieldController.text = "";
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   InputQty(
                     maxVal: 50,
                     initVal: order.quantity,
@@ -102,7 +120,7 @@ class EditQuantityPopup extends StatelessWidget {
                               CircularProgressIndicator(),
                               SizedBox(height: 16.0),
                               Text(
-                                'Processing Order...',
+                                'Processing Update...',
                                 style: TextStyle(
                                   fontFamily: 'Outfit',
                                   fontSize: 14,
@@ -115,7 +133,6 @@ class EditQuantityPopup extends StatelessWidget {
                     },
                     barrierDismissible: false,
                   );
-                  log("${state.quantity} ${state.orderId}");
 
                   bool success = await state.custUpdateOrder();
                   Future.microtask(

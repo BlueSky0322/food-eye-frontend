@@ -5,6 +5,7 @@ class CustOrderResponse {
   final int quantity;
   final DateTime orderDate;
   final String orderStatus;
+  final String orderDetails;
 
   CustOrderResponse({
     required this.orderId,
@@ -13,6 +14,7 @@ class CustOrderResponse {
     required this.quantity,
     required this.orderDate,
     required this.orderStatus,
+    required this.orderDetails,
   });
 
   factory CustOrderResponse.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class CustOrderResponse {
       quantity: json['quantity'],
       orderDate: DateTime.parse(json['orderDate']),
       orderStatus: json['orderStatus'],
+      orderDetails: json['orderDetails'],
     );
   }
 }

@@ -22,6 +22,7 @@ class CustOrderPageState extends ChangeNotifier {
 
   int? orderId;
   int? quantity;
+  String? orderDetails;
 
   CustOrderPageState(this.context) {
     userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -100,11 +101,14 @@ class CustOrderPageState extends ChangeNotifier {
   }
 
   Future<bool> custUpdateOrder() async {
+    orderDetails ??= "No remarks";
     try {
       CustomerUpdateOrderRequest updatedProduct = CustomerUpdateOrderRequest(
         orderId: orderId,
         quantity: quantity,
+        orderDetails: orderDetails,
       );
+
       notifyListeners();
       return await _orderService.custUpdateOrder(updatedProduct);
     } catch (error) {
