@@ -79,7 +79,8 @@ class OrderService {
   }
 
   Future<bool> custUpdateOrder(
-      CustomerUpdateOrderRequest updateOrderRequest) async {
+    CustomerUpdateOrderRequest updateOrderRequest,
+  ) async {
     final url = Uri.parse('$apiURL/Order/CustomerUpdateOrder');
 
     try {

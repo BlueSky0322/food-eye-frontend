@@ -53,7 +53,7 @@ class CustomOrderCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   const Text(
-                    "Seller: ",
+                    "Seller Name: ",
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontSize: 12,
@@ -93,7 +93,7 @@ class CustomOrderCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   const Text(
-                    "Order Date: ",
+                    "Date: ",
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontSize: 12,
@@ -101,7 +101,7 @@ class CustomOrderCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    DateFormat.yMMMd().format(order.orderDate),
+                    "${DateFormat.jmv().format(order.orderDate).trim()}, ${DateFormat.yMMMd().format(order.orderDate)}",
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontWeight: FontWeight.bold,
@@ -113,7 +113,7 @@ class CustomOrderCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   const Text(
-                    "Order Status: ",
+                    "Status: ",
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontSize: 12,
@@ -122,6 +122,26 @@ class CustomOrderCard extends StatelessWidget {
                   ),
                   Text(
                     order.orderStatus,
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  const Text(
+                    "Details: ",
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      fontSize: 12,
+                      color: Color.fromARGB(255, 82, 105, 95),
+                    ),
+                  ),
+                  Text(
+                    order.orderDetails,
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontWeight: FontWeight.bold,

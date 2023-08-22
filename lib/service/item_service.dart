@@ -36,7 +36,6 @@ class ItemService {
 
   Future<List<ItemResponse>> getItemsExpiringWithin(
       int days, String? userId) async {
-    log("$userId");
     try {
       final response = await client.get(
         Uri.parse('$apiURL/Item/GetItemsExpiringWithin/$days/$userId'),

@@ -68,6 +68,7 @@ class CustomGridTile extends StatelessWidget {
                   softWrap: true,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.merge(
                         const TextStyle(
                           fontFamily: 'Outfit',

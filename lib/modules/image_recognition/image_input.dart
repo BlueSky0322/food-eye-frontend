@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../modules/image_recognition/image_cropper.dart';
-import '../../utils/image_picker.dart';
+import '../../utils/image_helper.dart';
 
 class ImageInput {
   static void imageInputSelection(
