@@ -81,7 +81,6 @@ class AddProductPage extends StatelessWidget {
                                 state.selectPhoto(ImageSource.camera);
                               },
                             ),
-                            Text("${state.mb} MB"),
                             const SizedBox(
                               height: 16,
                             ),
