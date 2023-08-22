@@ -8,6 +8,7 @@ import 'package:food_eye_fyp/data/request_response_model/seller_order_response.d
 import 'package:food_eye_fyp/ui/seller/orders_page/orders_page_state.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 
+// ignore: must_be_immutable
 class EditStatusPopup extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final OrdersPageState state;

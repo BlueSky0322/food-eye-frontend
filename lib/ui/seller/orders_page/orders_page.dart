@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:food_eye_fyp/data/request_response_model/seller_order_response.dart';
 import 'package:food_eye_fyp/ui/seller/orders_page/orders_page_state.dart';
 import 'package:food_eye_fyp/ui/seller/orders_page/widgets/edit_status_popup.dart';

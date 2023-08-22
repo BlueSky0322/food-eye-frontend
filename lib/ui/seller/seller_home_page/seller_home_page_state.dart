@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/provider/user_provider.dart';
 import 'package:food_eye_fyp/service/item_service.dart';
 import 'package:food_eye_fyp/ui/seller/products_page/sorting_options_popup/sorting_options.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../../../data/request_response_model/item_response.dart';
@@ -99,7 +98,7 @@ class SellerHomePageState extends ChangeNotifier {
           await _itemService.getAllItems(userProvider.userId);
       return items;
     } catch (error) {
-      print('Error loading items: $error');
+      log('Error loading items: $error');
       rethrow; // Rethrow the error to be handled by the caller
     }
   }

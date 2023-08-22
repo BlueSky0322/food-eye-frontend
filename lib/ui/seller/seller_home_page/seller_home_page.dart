@@ -10,11 +10,9 @@ import 'package:food_eye_fyp/ui/seller/seller_home_page/settings_sidebar/setting
 import 'package:food_eye_fyp/ui/seller/seller_home_page/seller_home_page_state.dart';
 import 'package:food_eye_fyp/ui/seller/items_detail_page/items_detail_page.dart';
 import 'package:food_eye_fyp/ui/seller/items_detail_page/items_detail_page_state.dart';
+import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-// import '../../data/model/item.dart';
-import '../../../utils/constants.dart';
-import '../seller_bottom_nav_bar/nav_bar_state.dart';
 
 class SellerHomePage extends StatelessWidget {
   const SellerHomePage({super.key});

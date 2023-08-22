@@ -73,7 +73,7 @@ class SplashPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
+                  SizedBox(
                     width: 250,
                     height: 50,
                     child: ElevatedButton(

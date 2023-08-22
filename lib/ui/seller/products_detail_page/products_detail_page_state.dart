@@ -1,11 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_eye_fyp/data/request_response_model/item_response.dart';
 import 'package:food_eye_fyp/data/request_response_model/product_response.dart';
-
-import '../../../utils/constants.dart';
+import 'package:food_eye_fyp/utils/constants.dart';
 
 class ProductDetailState extends ChangeNotifier {
   //final BuildContext context;

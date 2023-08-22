@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/ui/customer/customer_home_page/customer_home_page_state.dart';
 import 'package:food_eye_fyp/ui/customer/customer_home_page/widgets/app_bar.dart';
@@ -8,7 +7,6 @@ import 'package:food_eye_fyp/ui/customer/customer_home_page/widgets/grid_tile.da
 import 'package:food_eye_fyp/ui/customer/customer_home_page/widgets/preorder_popup.dart';
 import 'package:food_eye_fyp/ui/customer/customer_home_page/widgets/welcome_card.dart';
 import 'package:food_eye_fyp/ui/customer/customer_home_page/settings_sidebar/settings_sidebar.dart';
-import 'package:food_eye_fyp/ui/seller/products_page/products_page_state.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:provider/provider.dart';
 

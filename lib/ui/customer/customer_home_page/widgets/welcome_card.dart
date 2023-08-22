@@ -56,7 +56,7 @@ Widget buildWelcomeCard(BuildContext context, String userEmail) {
                     color: Colors.teal.shade500,
                   ),
                   child: Text(
-                    "${userEmail}",
+                    "$userEmail",
                     style: TextStyle(
                       fontFamily: 'Outfit',
                       fontSize: 20,

@@ -5,7 +5,6 @@ import 'package:food_eye_fyp/ui/customer/customer_order_page/widgets/editquantit
 import 'package:food_eye_fyp/ui/customer/customer_order_page/customer_order_page_state.dart';
 import 'package:food_eye_fyp/ui/customer/customer_order_page/widgets/order_card.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CustOrderPage extends StatelessWidget {
@@ -213,17 +212,7 @@ class CustOrderPage extends StatelessWidget {
                         valueListenable: state.isDescending,
                         builder: (context, isDescending, _) {
                           return InkWell(
-                            onTap: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider(
-                              //       create: (context) =>
-                              //           ProductDetailState(sortedItems[index]),
-                              //       child: const ProductDetail(),
-                              //     ),
-                              //   ),
-                              // );
-                            },
+                            onTap: () {},
                             child: Slidable(
                               endActionPane: ActionPane(
                                 motion: const ScrollMotion(),
@@ -249,7 +238,7 @@ class CustOrderPage extends StatelessWidget {
                                     icon: Icons.delete_outline_rounded,
                                     label: "Delete",
                                     onPressed: (context) {
-                                      state.deleteOrder(item.orderId!);
+                                      state.deleteOrder(item.orderId);
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(

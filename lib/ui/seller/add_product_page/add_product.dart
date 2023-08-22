@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/components/custom_input_fields/product_fields/date_field.dart';
 import 'package:food_eye_fyp/components/custom_input_fields/product_fields/price_field.dart';

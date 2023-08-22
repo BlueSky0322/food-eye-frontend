@@ -8,6 +8,7 @@ import 'package:food_eye_fyp/ui/customer/customer_order_page/customer_order_page
 import 'package:food_eye_fyp/utils/constants.dart';
 import 'package:input_quantity/input_quantity.dart';
 
+// ignore: must_be_immutable
 class EditQuantityPopup extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final CustOrderPageState state;

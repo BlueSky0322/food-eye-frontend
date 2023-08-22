@@ -6,7 +6,6 @@ import 'package:food_eye_fyp/data/request_response_model/add_item_request.dart';
 import 'package:food_eye_fyp/provider/user_provider.dart';
 import 'package:food_eye_fyp/service/barcode_lookup_service.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

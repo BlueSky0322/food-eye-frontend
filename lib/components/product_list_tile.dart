@@ -1,12 +1,9 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_eye_fyp/data/request_response_model/product_response.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
-import 'package:food_eye_fyp/utils/expiry_status.dart';
 import 'package:intl/intl.dart';
-import '../data/request_response_model/product_response.dart';
 
 class CustomListTile extends StatelessWidget {
   final ProductResponse product;
