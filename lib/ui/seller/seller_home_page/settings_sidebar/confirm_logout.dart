@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_eye_fyp/service/background_service.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -43,6 +44,7 @@ class ConfirmLogoutDialog extends StatelessWidget {
             ),
           ),
           onPressed: () {
+            BackgroundService.unregisterDateCheckerBackgroundService();
             Navigator.pushNamedAndRemoveUntil(
               context,
               '/splash',
