@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:food_eye_fyp/data/request_response_model/add_product_request.dar
 import 'package:food_eye_fyp/provider/user_provider.dart';
 import 'package:food_eye_fyp/service/product_service.dart';
 import 'package:food_eye_fyp/utils/constants.dart';
+import 'package:food_eye_fyp/utils/image_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -29,10 +29,9 @@ class AddProductState extends ChangeNotifier {
   int? shelfLife;
   String? status;
   String? userId;
-  XFile? _imageFile;
-  XFile? get imageFile => _imageFile;
-  File? image;
-  double? mb;
+  XFile? _selectedImage;
+  XFile? get imageFile => _selectedImage;
+  XFile? _compressedFile;
 
   late UserProvider userProvider;
   AddProductState(this.context) {
@@ -86,33 +85,35 @@ class AddProductState extends ChangeNotifier {
   }
 
   ImageProvider<Object> get pickedImage {
-    if (_imageFile != null) {
-      if (_imageFile!.path != defaultImage) {
-        image = File(_imageFile!.path);
-        final bytes = image!.lengthSync();
-        final kb = bytes / 1024;
-        mb = (kb / 1024);
-        log("$mb bytes");
-      } else {
-        mb = 0;
-      }
-
+    if (_selectedImage != null) {
       return Image.file(
-        File(_imageFile!.path),
+        File(_selectedImage!.path),
         fit: BoxFit.cover,
       ).image;
-    } else {
-      return const NetworkImage(
-        defaultImage,
-      );
     }
+    return const NetworkImage(
+      defaultImage,
+    );
   }
 
   void selectPhoto(ImageSource source) async {
     final pickedImage = await picker.pickImage(
       source: source,
     );
-    _imageFile = pickedImage;
+
+    if (pickedImage != null) {
+      final selectedImageFile = File(pickedImage.path);
+      final bytes = selectedImageFile.lengthSync();
+      final kb = bytes / 1024;
+      final mb = kb / 1024;
+      if (mb >= 1.0) {
+        _compressedFile = await compress(selectedImageFile);
+        _selectedImage = _compressedFile;
+        // log("${File(_selectedImage!.path).lengthSync() / 1024 / 1024}");
+      } else {
+        _selectedImage = pickedImage;
+      }
+    }
     notifyListeners();
   }
 
