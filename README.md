@@ -1,16 +1,23 @@
-# FoodEye
+# Final Year Project
+**FoodEye**: A Food Expiry Date Tracker application using barcode, image and text recognition for consumers 
+# Features
+- User Login/Logout and Register
+- Home Page/Item Listings
+- Pages for CRUD Functionalities
+- Sorting Functionality
+- Barcode Scanner
+- Image-to-Text Recognition
+- Categorized Item Viewing
+- Push Notification
 
-Final Year Project
+# Getting Started
+### Flutter SDK
+- Installation guides [from the official website](https://docs.flutter.dev/get-started/install)
+### Android Emulator
+- Install Android Virtual Device Manager and create a emulated mobile device (API 33) ([full guide here](https://developer.android.com/studio/run/managing-avds))
 
-## Getting Started
+# Technologies Used
+- Flutter framework with Dart on VS Code
+- AVD Manager for mobile device emulation
+- pub.dev for all libraries/dependencies
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
