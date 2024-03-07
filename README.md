@@ -24,3 +24,4 @@
 - pub.dev for all libraries/dependencies
 
 # Check Out The Project
+[Simple Presentation on FoodEye](FoodEye-Slides.pdf)
