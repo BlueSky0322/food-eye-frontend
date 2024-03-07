@@ -1,5 +1,6 @@
 # Final Year Project
-**FoodEye**: A Food Expiry Date Tracker application using barcode, image and text recognition for consumers 
+![FoodEye Poster](FoodEye-Poster.png)
+
 # Features
 - User Login/Logout and Register
 - Home Page/Item Listings
@@ -22,3 +23,4 @@
 - Google ML Kit for text recognition
 - pub.dev for all libraries/dependencies
 
+# Check Out The Project
