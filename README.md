@@ -19,5 +19,6 @@
 # Technologies Used
 - Flutter framework with Dart on VS Code
 - AVD Manager for mobile device emulation
+- Google ML Kit for text recognition
 - pub.dev for all libraries/dependencies
 
