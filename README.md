@@ -41,8 +41,18 @@ git clone repo-web-url/ssh-key
 ```
 2. Find the `http_overrides` folder and change `usbDebugURL` variable to the URL retrieved from Conveyor.
 3. Recompile the code as an apk, in terminal:
-  - asd
-  - asd
-  - asd
-4. 
+  - ```
+    flutter clean
+    ```
+  - ```
+    flutter pub get
+    ```
+  - ```
+    flutter build apk --split-per-abi
+    ```
+4. Access the apk file in root folder at `build > app > outputs > flutter-apk > app-arm64-v8a-release.apk`
+> [!NOTE]
+> For more details on building and releasing applications on Flutter, refer to the official guide on [Deployment](https://docs.flutter.dev/deployment).
+5. Upload the apk in OneDrive/Google Drive, then download the reinstall the application on your device. The application should be working now.
+
 #### Running on Android Emulator
