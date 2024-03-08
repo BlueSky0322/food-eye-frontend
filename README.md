@@ -1,5 +1,5 @@
 # Final Year Project
-![FoodEye Poster](FoodEye-Poster.pg)
+![FoodEye Poster](FoodEye-Poster.png)
 
 # Features
 - User Login/Logout and Register
@@ -56,3 +56,4 @@ git clone repo-web-url/ssh-key
 5. Upload the apk in OneDrive/Google Drive, then download the reinstall the application on your device. The application should be working now.
 
 #### Running on Android Emulator
+To use Flutter with Android Emulator, you will have to follow these steps on [How To Run Flutter App in VSCode Android Emulator on Windows 10 or 11 (2023)](https://www.youtube.com/watch?v=EhGW4UYpKSE&ab_channel=GhostTogether). 
